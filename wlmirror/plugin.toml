@@ -1,13 +1,12 @@
 id           = "evergaster/wlmirror"
 name         = "WL Mirror"
 version      = "1.0.0"
-plugin_api   = 4
-min_noctalia = "5.0.0"
+plugin_api   = 3
 author       = "evergaster"
 license      = "MIT"
 icon         = "cast"
 description  = "Prende/apaga wl-mirror para espejear un output desde el control center."
-tags         = ["screen", "mirror", "wayland", "casting"]
+tags         = ["screen"]
 dependencies = ["wl-mirror"]
 
 [[setting]]
