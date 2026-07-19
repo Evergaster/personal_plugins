@@ -1,6 +1,6 @@
 id           = "evergaster/wlmirror"
 name         = "WL Mirror"
-version      = "1.0.0"
+version      = "1.0.1"
 plugin_api   = 3
 author       = "evergaster"
 license      = "MIT"
