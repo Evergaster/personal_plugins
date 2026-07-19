@@ -1,7 +1,7 @@
 id           = "evergaster/wlmirror"
 name         = "WL Mirror"
-version      = "1.0.1"
-plugin_api   = 3
+version      = "1.0.2"
+plugin_api   = 4
 author       = "evergaster"
 license      = "MIT"
 icon         = "cast"
@@ -12,15 +12,15 @@ dependencies = ["wl-mirror"]
 [[setting]]
 key         = "output"
 type        = "string"
-label       = "Output a espejear"
-description = "Nombre del conector (ej. eDP-1, HDMI-A-1). Vacío = output enfocado."
+label_key   = "settings.output.label"
+description_key = "settings.output.description"
 default     = ""
 
 [[setting]]
 key         = "extra_args"
 type        = "string"
-label       = "Argumentos extra"
-description = "Flags adicionales para wl-mirror (ej. --fullscreen)."
+label_key   = "settings.extra_args.label"
+description_key = "settings.extra_args.description"
 default     = ""
 
 [[shortcut]]

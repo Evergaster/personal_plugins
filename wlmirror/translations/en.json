@@ -1,0 +1,6 @@
+{
+  "settings.output.label": "Output to mirror",
+  "settings.output.description": "Connector name (e.g. eDP-1, HDMI-A-1). Empty = focused output.",
+  "settings.extra_args.label": "Extra arguments",
+  "settings.extra_args.description": "Additional flags for wl-mirror (e.g. --fullscreen)."
+}
