@@ -1,0 +1,33 @@
+id           = "evergaster/wlmirror"
+name         = "WL Mirror"
+version      = "1.0.0"
+plugin_api   = 4
+min_noctalia = "5.0.0"
+author       = "evergaster"
+license      = "MIT"
+icon         = "cast"
+description  = "Prende/apaga wl-mirror para espejear un output desde el control center."
+tags         = ["screen", "mirror", "wayland", "casting"]
+dependencies = ["wl-mirror"]
+
+[[setting]]
+key         = "output"
+type        = "string"
+label       = "Output a espejear"
+description = "Nombre del conector (ej. eDP-1, HDMI-A-1). Vacío = output enfocado."
+default     = ""
+
+[[setting]]
+key         = "extra_args"
+type        = "string"
+label       = "Argumentos extra"
+description = "Flags adicionales para wl-mirror (ej. --fullscreen)."
+default     = ""
+
+[[shortcut]]
+id    = "toggle"
+entry = "toggle.luau"
+
+[[service]]
+id    = "monitor"
+entry = "monitor.luau"

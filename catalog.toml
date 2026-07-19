@@ -1,0 +1,1 @@
+[[plugin]]Eid           = "evergaster/wlmirror"Ename         = "WL Mirror"Eversion      = "1.0.0"Eauthor       = "evergaster"Elicense      = "MIT"Eicon         = "cast"Edescription  = "Prende/apaga wl-mirror para espejear un output desde el control center."Emin_noctalia = "5.0.0"Etags         = ["screen", "mirror", "wayland"]Edependencies = ["wl-mirror"]
