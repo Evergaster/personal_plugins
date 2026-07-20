@@ -1,6 +1,6 @@
 -- monitor.luau
 -- Revisa cada 2s si wl-mirror sigue vivo (por si el usuario lo cerró
--- manualmente con la ventana) y publica el estado para el shortcut.
+-- manualmente con la ventana) y publica el estado para el widget/panel.
 
 noctalia.setUpdateInterval(2000)
 

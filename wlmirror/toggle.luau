@@ -1,57 +1,24 @@
--- toggle.luau
--- Tile del control center: un click lanza wl-mirror sobre el output
--- configurado (o el enfocado), otro click lo mata.
+--!nonstrict
+-- toggle.luau — Bar widget que abre el panel de WL Mirror.
+-- Muestra el glyph "cast" + texto y abre el panel al hacer click.
 
 local running = false
 
 local function render()
-  shortcut.setLabel(running and "Mirroring" or "Mirror")
-  shortcut.setIcon("cast")
-  shortcut.setActive(running)
+  barWidget.setGlyph("cast")
+  barWidget.setText(running and "Mirroring" or "Mirror")
+  barWidget.setTooltip(running and "Click to stop mirroring" or "Click to open mirror panel")
 end
 
--- Se actualiza solo cuando el service detecta cambios (incluye el caso
--- de que el usuario cierre la ventana de wl-mirror a mano).
 noctalia.state.watch("running", function(value)
   running = value == true
   render()
 end)
 
-render()
-
-function onClick()
-  if running then
-    noctalia.runAsync("pkill -x wl-mirror")
-    noctalia.notify("WL Mirror", "Deteniendo espejo")
-    return
-  end
-
-  if not noctalia.commandExists("wl-mirror") then
-    noctalia.notifyError("WL Mirror", "wl-mirror no está instalado")
-    return
-  end
-
-  local output = noctalia.getConfig("output")
-  if output == nil or noctalia.string.trim(output) == "" then
-    output = noctalia.focusedOutputName()
-  end
-
-  if output == nil or output == "" then
-    noctalia.notifyError("WL Mirror", "No se detectó ningún output")
-    return
-  end
-
-  local extra = noctalia.getConfig("extra_args") or ""
-  local cmd = "wl-mirror " .. output .. " " .. extra
-
-  noctalia.runAsync(cmd)
-  noctalia.notify("WL Mirror", "Espejando " .. output)
+function update()
+  render()
 end
 
-function onRightClick()
-  local output = noctalia.getConfig("output")
-  if output == nil or output == "" then
-    output = "(output enfocado)"
-  end
-  noctalia.notify("WL Mirror", "Configurado: " .. output)
+function onClick()
+  noctalia.togglePanel("evergaster/wlmirror:panel")
 end

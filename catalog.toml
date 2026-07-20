@@ -1,12 +1,12 @@
 [[plugin]]
 id           = "evergaster/wlmirror"
 name         = "WL Mirror"
-version      = "1.0.2"
+version      = "1.1.0"
 author       = "evergaster"
 license      = "MIT"
 icon         = "cast"
-description  = "Prende/apaga wl-mirror para espejear un output desde el control center."
+description  = "Mirror Wayland outputs or windows using wl-mirror. Toggle from the bar widget with a dropdown panel."
 deprecated   = false
-plugin_api   = 3
+plugin_api   = 4
 tags         = ["screen"]
 dependencies = ["wl-mirror"]

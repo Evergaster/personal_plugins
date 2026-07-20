@@ -1,22 +1,35 @@
 # WL Mirror
 
-Mirror a Wayland output to another display using `wl-mirror`. Toggle mirroring from the control center with a single click.
+Mirror Wayland outputs or windows using `wl-mirror`. Control mirroring from the bar widget with a dropdown panel.
 
 ## Plugin
 
 - **Id:** `evergaster/wlmirror`
-- **Shortcut entry:** `toggle` — control-center tile to start/stop mirroring
+- **Widget entry:** `mirror` — bar widget that opens the mirror panel
+- **Panel entry:** `panel` — dropdown panel with output and window selection
 - **Service entry:** `monitor` — background process that watches for `wl-mirror` lifecycle changes
 
 ## Usage
 
-Add the **Mirror** shortcut from **Settings → Control Center → Shortcuts**. Click the tile to toggle mirroring on the configured output (or the currently focused output by default). Right-click to see the current configuration.
+Add the **Mirror** widget from **Settings → Bar → Add Widget**. Click the widget to open the panel with two sections:
+
+- **Mirror** — Lists all connected outputs. Click an output to start mirroring it. Click again to stop.
+- **Window** — Click "Select Window" to use the xdg-desktop-portal window picker (requires a portal backend like `xdg-desktop-portal-hyprland` or `xdg-desktop-portal-wlr`).
 
 ## Requirements
 
 - `wl-mirror` must be installed and available on `PATH`.
+- For window selection: a working xdg-desktop-portal backend.
 
 ## Settings
 
-- **Output** — Connector name to mirror (e.g. `eDP-1`, `HDMI-A-1`). Leave empty to mirror the focused output.
+- **Output** — Default connector name to mirror (e.g. `eDP-1`, `HDMI-A-1`). Leave empty to use the panel selection.
 - **Extra arguments** — Additional flags passed to `wl-mirror` (e.g. `--fullscreen`).
+
+## Changelog
+
+### 1.1.0
+- Replaced control-center shortcut with bar widget + dropdown panel.
+- Added panel with Mirror (output selection) and Window (portal window picker) sections.
+- Dynamic output list that updates when the panel opens.
+- Bumped plugin API to v4.
