@@ -1,13 +1,11 @@
 --!nonstrict
 -- toggle.luau — Bar widget que abre el panel de WL Mirror.
--- Muestra el glyph "cast" + texto y abre el panel al hacer click.
+-- Solo muestra el glyph "cast" y abre el panel al hacer click.
 
 local running = false
 
 local function render()
-  barWidget.setGlyph("cast")
-  barWidget.setText(running and "Mirroring" or "Mirror")
-  barWidget.setTooltip(running and "Click to stop mirroring" or "Click to open mirror panel")
+  barWidget.setGlyph(running and "cast-connected" or "cast")
 end
 
 noctalia.state.watch("running", function(value)
