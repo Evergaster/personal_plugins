@@ -1,11 +1,11 @@
 --!nonstrict
 -- panel.luau — Panel desplegable del bar widget.
--- Mirror — selector de outputs + checkbox fullscreen persistente.
--- La ventana de wl-mirror siempre se envía al monitor externo.
+-- Selector de source (que monitor clonar) y destination (donde mostrar la ventana).
 
 local running = false
 local outputs = {}
-local selectedOutput = 1
+local sourceIndex = 1
+local destIndex = 1
 local fullscreen = false
 local dataDir = nil
 
@@ -16,23 +16,35 @@ local function getDataDir()
   return dataDir
 end
 
-local function loadFullscreen()
+local function loadState()
   local dir = getDataDir()
   if dir == nil then return end
   local ok, raw = pcall(noctalia.readFile, dir .. "/panel.json")
   if ok and raw then
     local decodeOk, data = pcall(noctalia.json.decode, raw)
-    if decodeOk and data and data.fullscreen ~= nil then
-      fullscreen = data.fullscreen == true or data.fullscreen == "true"
+    if decodeOk and data then
+      if data.fullscreen ~= nil then
+        fullscreen = data.fullscreen == true or data.fullscreen == "true"
+      end
+      if data.sourceIndex ~= nil then
+        sourceIndex = tonumber(data.sourceIndex) or 1
+      end
+      if data.destIndex ~= nil then
+        destIndex = tonumber(data.destIndex) or 1
+      end
     end
   end
 end
 
-local function saveFullscreen()
+local function saveState()
   local dir = getDataDir()
   if dir == nil then return end
   noctalia.mkdirAll(dir)
-  noctalia.writeFile(dir .. "/panel.json", noctalia.json.encode({ fullscreen = fullscreen }))
+  noctalia.writeFile(dir .. "/panel.json", noctalia.json.encode({
+    fullscreen = fullscreen,
+    sourceIndex = sourceIndex,
+    destIndex = destIndex,
+  }))
 end
 
 local function getExtraArgs()
@@ -43,16 +55,7 @@ local function getExtraArgs()
   return ""
 end
 
-local function getExternalOutput()
-  for _, out in outputs do
-    if not string.match(out.name, "^eDP") then
-      return out
-    end
-  end
-  return nil
-end
-
-local function startMirror(target)
+local function startMirror(source, destination)
   if not noctalia.commandExists("wl-mirror") then
     noctalia.notifyError("WL Mirror", "wl-mirror no esta instalado")
     return
@@ -67,17 +70,15 @@ local function startMirror(target)
     args = args .. extra
   end
 
-  local ext = getExternalOutput()
-
-  if ext and noctalia.commandExists("hyprctl") then
+  if destination and noctalia.commandExists("hyprctl") then
     local script = string.format(
       "wl-mirror%s %s & sleep 0.5 && hyprctl dispatch focuswindow class:wl-mirror 2>/dev/null && hyprctl dispatch movewindow monitor:%s 2>/dev/null",
-      args, target, ext.name
+      args, source, destination
     )
     noctalia.log("Running: " .. script)
     noctalia.runAsync(script)
   else
-    local cmd = "wl-mirror" .. args .. " " .. target
+    local cmd = "wl-mirror" .. args .. " " .. source
     noctalia.log("Running: " .. cmd)
     noctalia.runAsync(cmd, function(result)
       if result.exitCode ~= 0 then
@@ -86,7 +87,7 @@ local function startMirror(target)
     end)
   end
 
-  noctalia.notify("WL Mirror", "Espejando " .. target)
+  noctalia.notify("WL Mirror", "Espejando " .. source .. " en " .. (destination or "monitor actual"))
 end
 
 local function stopMirror()
@@ -112,16 +113,26 @@ local function render()
   local mirrorSection
   if #outputNames == 0 then
     mirrorSection = ui.column({ gap = 8 }, {
-      ui.label({ text = "Mirror", fontWeight = "medium", color = "on_surface_variant" }),
+      ui.label({ text = "Monitor", fontWeight = "medium", color = "on_surface_variant" }),
       ui.label({ text = "No outputs detected", color = "on_surface_variant" }),
     })
   else
-    mirrorSection = ui.column({ gap = 8 }, {
-      ui.label({ text = "Mirror", fontWeight = "medium", color = "on_surface_variant" }),
-      ui.select({
-        options = outputNames,
-        selectedIndex = selectedOutput - 1,
-        onChange = "onOutputSelect",
+    mirrorSection = ui.column({ gap = 12 }, {
+      ui.column({ gap = 4 }, {
+        ui.label({ text = "Clone from", fontWeight = "medium", color = "on_surface_variant" }),
+        ui.select({
+          options = outputNames,
+          selectedIndex = sourceIndex - 1,
+          onChange = "onSourceSelect",
+        }),
+      }),
+      ui.column({ gap = 4 }, {
+        ui.label({ text = "Show on", fontWeight = "medium", color = "on_surface_variant" }),
+        ui.select({
+          options = outputNames,
+          selectedIndex = destIndex - 1,
+          onChange = "onDestSelect",
+        }),
       }),
       ui.row({ align = "center", gap = 8 }, {
         ui.toggle({ checked = fullscreen, onChange = "onFullscreenToggle" }),
@@ -153,9 +164,10 @@ local function render()
 end
 
 function onOpen(_context)
-  loadFullscreen()
+  loadState()
   outputs = noctalia.outputs() or {}
-  selectedOutput = 1
+  if sourceIndex > #outputs then sourceIndex = 1 end
+  if destIndex > #outputs then destIndex = 1 end
   render()
 end
 
@@ -163,14 +175,21 @@ function onCloseClicked()
   panel.close()
 end
 
-function onOutputSelect(index)
-  selectedOutput = (tonumber(index) or 0) + 1
+function onSourceSelect(index)
+  sourceIndex = (tonumber(index) or 0) + 1
+  saveState()
+  render()
+end
+
+function onDestSelect(index)
+  destIndex = (tonumber(index) or 0) + 1
+  saveState()
   render()
 end
 
 function onFullscreenToggle(value)
   fullscreen = value == "true"
-  saveFullscreen()
+  saveState()
   render()
 end
 
@@ -179,9 +198,10 @@ function onMirrorToggle()
     stopMirror()
     return
   end
-  local out = outputs[selectedOutput]
-  if out then
-    startMirror(out.name)
+  local src = outputs[sourceIndex]
+  local dst = outputs[destIndex]
+  if src then
+    startMirror(src.name, dst and dst.name or nil)
   else
     noctalia.notifyError("WL Mirror", "No output selected")
   end
