@@ -6,6 +6,33 @@ local running = false
 local outputs = {}
 local selectedOutput = 1
 local fullscreen = false
+local dataDir = nil
+
+local function getDataDir()
+  if dataDir == nil then
+    dataDir = noctalia.pluginDataDir()
+  end
+  return dataDir
+end
+
+local function loadFullscreen()
+  local dir = getDataDir()
+  if dir == nil then return end
+  local ok, raw = pcall(noctalia.readFile, dir .. "/panel.json")
+  if ok and raw then
+    local decodeOk, data = pcall(noctalia.json.decode, raw)
+    if decodeOk and data and data.fullscreen ~= nil then
+      fullscreen = data.fullscreen == true or data.fullscreen == "true"
+    end
+  end
+end
+
+local function saveFullscreen()
+  local dir = getDataDir()
+  if dir == nil then return end
+  noctalia.mkdirAll(dir)
+  noctalia.writeFile(dir .. "/panel.json", noctalia.json.encode({ fullscreen = fullscreen }))
+end
 
 local function getExtraArgs()
   local extra = noctalia.getConfig("extra_args") or ""
@@ -13,23 +40,6 @@ local function getExtraArgs()
     return " " .. extra
   end
   return ""
-end
-
-local function loadFullscreen()
-  local dir = noctalia.pluginDataDir()
-  local raw = noctalia.readFile(dir .. "/panel.json")
-  if raw then
-    local data = noctalia.json.decode(raw)
-    if data and data.fullscreen ~= nil then
-      fullscreen = data.fullscreen == true or data.fullscreen == "true"
-    end
-  end
-end
-
-local function saveFullscreen()
-  local dir = noctalia.pluginDataDir()
-  noctalia.mkdirAll(dir)
-  noctalia.writeFile(dir .. "/panel.json", noctalia.json.encode({ fullscreen = fullscreen }))
 end
 
 local function startMirror(target)
@@ -130,6 +140,7 @@ end
 function onFullscreenToggle(value)
   fullscreen = value == "true"
   saveFullscreen()
+  render()
 end
 
 function onMirrorToggle()

@@ -1,6 +1,5 @@
 --!nonstrict
 -- toggle.luau — Bar widget que abre el panel de WL Mirror.
--- Solo muestra el glyph "cast" y abre el panel al hacer click.
 
 local running = false
 
@@ -14,6 +13,7 @@ noctalia.state.watch("running", function(value)
 end)
 
 function update()
+  noctalia.setUpdateInterval(1000)
   render()
 end
 
