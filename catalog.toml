@@ -7,6 +7,6 @@ license      = "MIT"
 icon         = "cast"
 description  = "Mirror Wayland outputs or windows using wl-mirror. Toggle from the bar widget with a dropdown panel."
 deprecated   = false
-plugin_api   = 4
+plugin_api   = 3
 tags         = ["screen"]
 dependencies = ["wl-mirror"]
