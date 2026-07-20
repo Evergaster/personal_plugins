@@ -47,15 +47,21 @@ local function startMirror(target)
     noctalia.notifyError("WL Mirror", "wl-mirror no esta instalado")
     return
   end
-  local cmd = "wl-mirror " .. target
+  local cmd = "wl-mirror"
   if fullscreen then
     cmd = cmd .. " --fullscreen"
   end
+  cmd = cmd .. " " .. target
   local extra = getExtraArgs()
   if extra ~= "" then
     cmd = cmd .. extra
   end
-  noctalia.runAsync(cmd)
+  noctalia.log("Running: " .. cmd)
+  noctalia.runAsync(cmd, function(result)
+    if result.exitCode ~= 0 then
+      noctalia.log("wl-mirror exit " .. tostring(result.exitCode) .. ": " .. (result.stderr or ""))
+    end
+  end)
   noctalia.notify("WL Mirror", "Espejando " .. target)
 end
 
@@ -126,6 +132,7 @@ function onOpen(_context)
   loadFullscreen()
   outputs = noctalia.outputs() or {}
   selectedOutput = 1
+  noctalia.log("Panel opened, outputs: " .. tostring(#outputs))
   render()
 end
 
@@ -135,6 +142,7 @@ end
 
 function onOutputSelect(index)
   selectedOutput = (tonumber(index) or 0) + 1
+  render()
 end
 
 function onFullscreenToggle(value)
@@ -150,7 +158,10 @@ function onMirrorToggle()
   end
   local out = outputs[selectedOutput]
   if out then
+    noctalia.log("Selected output: " .. out.name)
     startMirror(out.name)
+  else
+    noctalia.notifyError("WL Mirror", "No output selected")
   end
 end
 
