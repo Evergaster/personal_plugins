@@ -7,6 +7,6 @@ license      = "MIT"
 icon         = "cast"
 description  = "Prende/apaga wl-mirror para espejear un output desde el control center."
 deprecated   = false
-plugin_api   = 4
+plugin_api   = 3
 tags         = ["screen"]
 dependencies = ["wl-mirror"]
