@@ -1,12 +1,11 @@
 --!nonstrict
 -- panel.luau — Panel desplegable del bar widget.
--- Dos secciones:
---   Mirror — selector de outputs conectados + botón para iniciar/stopear
---   Window — selección de ventana vía xdg-desktop-portal
+-- Mirror — selector de outputs + checkbox fullscreen persistente.
 
 local running = false
 local outputs = {}
 local selectedOutput = 1
+local fullscreen = false
 
 local function getExtraArgs()
   local extra = noctalia.getConfig("extra_args") or ""
@@ -16,12 +15,37 @@ local function getExtraArgs()
   return ""
 end
 
+local function loadFullscreen()
+  local dir = noctalia.pluginDataDir()
+  local raw = noctalia.readFile(dir .. "/panel.json")
+  if raw then
+    local data = noctalia.json.decode(raw)
+    if data and data.fullscreen ~= nil then
+      fullscreen = data.fullscreen == true or data.fullscreen == "true"
+    end
+  end
+end
+
+local function saveFullscreen()
+  local dir = noctalia.pluginDataDir()
+  noctalia.mkdirAll(dir)
+  noctalia.writeFile(dir .. "/panel.json", noctalia.json.encode({ fullscreen = fullscreen }))
+end
+
 local function startMirror(target)
   if not noctalia.commandExists("wl-mirror") then
     noctalia.notifyError("WL Mirror", "wl-mirror no esta instalado")
     return
   end
-  noctalia.runAsync("wl-mirror " .. target .. getExtraArgs())
+  local cmd = "wl-mirror " .. target
+  if fullscreen then
+    cmd = cmd .. " --fullscreen"
+  end
+  local extra = getExtraArgs()
+  if extra ~= "" then
+    cmd = cmd .. extra
+  end
+  noctalia.runAsync(cmd)
   noctalia.notify("WL Mirror", "Espejando " .. target)
 end
 
@@ -59,6 +83,10 @@ local function render()
         selectedIndex = selectedOutput - 1,
         onChange = "onOutputSelect",
       }),
+      ui.row({ align = "center", gap = 8 }, {
+        ui.toggle({ checked = fullscreen, onChange = "onFullscreenToggle" }),
+        ui.label({ text = "Fullscreen", flexGrow = 1 }),
+      }),
       ui.button({
         text = running and "Stop Mirror" or "Start Mirror",
         glyph = running and "player-stop" or "player-play",
@@ -81,22 +109,11 @@ local function render()
     }),
 
     mirrorSection,
-
-    ui.separator({}),
-
-    ui.column({ gap = 8 }, {
-      ui.label({ text = "Window", fontWeight = "medium", color = "on_surface_variant" }),
-      ui.button({
-        text = running and "Stop Mirror" or "Select Window",
-        glyph = running and "player-stop" or "app-window",
-        variant = running and "destructive" or "default",
-        onClick = "onWindowClick",
-      }),
-    }),
   }))
 end
 
 function onOpen(_context)
+  loadFullscreen()
   outputs = noctalia.outputs() or {}
   selectedOutput = 1
   render()
@@ -110,6 +127,11 @@ function onOutputSelect(index)
   selectedOutput = (tonumber(index) or 0) + 1
 end
 
+function onFullscreenToggle(value)
+  fullscreen = value == "true"
+  saveFullscreen()
+end
+
 function onMirrorToggle()
   if running then
     stopMirror()
@@ -119,19 +141,6 @@ function onMirrorToggle()
   if out then
     startMirror(out.name)
   end
-end
-
-function onWindowClick()
-  if running then
-    stopMirror()
-    return
-  end
-  if not noctalia.commandExists("wl-mirror") then
-    noctalia.notifyError("WL Mirror", "wl-mirror no esta instalado")
-    return
-  end
-  noctalia.runAsync("wl-mirror portal:window" .. getExtraArgs())
-  noctalia.notify("WL Mirror", "Selecciona una ventana...")
 end
 
 noctalia.state.watch("running", function(value)
