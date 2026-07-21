@@ -70,17 +70,15 @@ local function startMirror(source, destination)
     args = args .. extra
   end
 
-  local launchCmd = string.format("setsid wl-mirror%s %s >/dev/null 2>&1 &", args, source)
-  noctalia.log("Launching: " .. launchCmd)
-  noctalia.runAsync(launchCmd)
-
-  if destination and noctalia.commandExists("hyprctl") then
-    local moveScript = string.format(
-      "sleep 1 && hyprctl dispatch focuswindow 'wl-mirror' 2>/dev/null && hyprctl dispatch movewindow 'monitor:%s' 2>/dev/null",
-      destination
-    )
-    noctalia.log("Moving window: " .. moveScript)
-    noctalia.runAsync(moveScript)
+  if destination then
+    if noctalia.commandExists("hyprctl") then
+      noctalia.runAsync(string.format("hyprctl dispatch focusmonitor '%s' 2>/dev/null", destination))
+    elseif noctalia.commandExists("niri") then
+      noctalia.runAsync(string.format("niri msg action focus-output '%s' 2>/dev/null", destination))
+    end
+    noctalia.runAsync(string.format("sleep 0.3 && setsid wl-mirror%s %s >/dev/null 2>&1 &", args, source))
+  else
+    noctalia.runAsync(string.format("setsid wl-mirror%s %s >/dev/null 2>&1 &", args, source))
   end
 
   noctalia.notify("WL Mirror", "Espejando " .. source .. " en " .. (destination or "monitor actual"))
