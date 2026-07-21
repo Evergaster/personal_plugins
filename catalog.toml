@@ -1,7 +1,7 @@
 [[plugin]]
 id           = "evergaster/wlmirror"
 name         = "WL Mirror"
-version      = "1.2.0"
+version      = "1.2.1"
 author       = "evergaster"
 license      = "MIT"
 icon         = "cast"
