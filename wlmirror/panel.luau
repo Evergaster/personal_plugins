@@ -71,9 +71,10 @@ local function startMirror(source, destination)
   end
 
   if destination and noctalia.commandExists("niri") then
+    noctalia.runAsync(string.format("setsid wl-mirror%s %s >/dev/null 2>&1 &", args, source))
     noctalia.runAsync(string.format(
-      "niri msg action focus-output '%s' 2>/dev/null; sleep 0.5; setsid wl-mirror%s %s >/dev/null 2>&1 &",
-      destination, args, source
+      "sleep 1.5 && niri msg action move-column-to-monitor '%s' 2>/dev/null",
+      destination
     ))
   elseif destination and noctalia.commandExists("hyprctl") then
     noctalia.runAsync(string.format("setsid wl-mirror%s %s >/dev/null 2>&1 &", args, source))
