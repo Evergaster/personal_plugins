@@ -1,0 +1,56 @@
+{
+  "settings.command.label": "Comando",
+  "settings.command.description": "Ruta o nombre del ejecutable openNothing (debe estar en PATH).",
+  "settings.mac.label": "MAC Bluetooth",
+  "settings.mac.description": "Direccion MAC de los audifonos Nothing/CMF.",
+  "settings.channel.label": "Canal RFCOMM",
+  "settings.channel.description": "Canal RFCOMM para la conexion SPP (por defecto 15).",
+  "settings.model.label": "ID de modelo",
+  "settings.model.description": "Identificador del modelo que devuelve openNothing (ej. B172).",
+  "settings.timeout.label": "Tiempo de espera (s)",
+  "settings.timeout.description": "Segundos a esperar una respuesta Bluetooth.",
+  "settings.poll_interval_ms.label": "Intervalo de consulta (ms)",
+  "settings.poll_interval_ms.description": "Cada cuanto se consulta el estado del dispositivo.",
+  "settings.scripted.label": "Modo demo",
+  "settings.scripted.description": "Ejecutar openNothing sin Bluetooth (demo).",
+  "settings.show_percent.label": "Mostrar porcentajes",
+  "settings.show_percent.description": "Mostrar porcentajes de bateria en el widget.",
+  "settings.low_battery_threshold.label": "Umbral de bateria baja",
+  "settings.low_battery_threshold.description": "Porcentaje de bateria a marcar como bajo.",
+
+  "ui.title": "Nothing Buds",
+  "ui.disconnected": "Sin conexion",
+  "ui.refresh": "Actualizar",
+  "ui.updating": "Actualizando",
+
+  "battery.header": "Bateria",
+  "battery.left": "Izq",
+  "battery.right": "Der",
+  "battery.case": "Estuche",
+
+  "anc.header": "ANC",
+  "anc.high": "Alto",
+  "anc.mid": "Medio",
+  "anc.low": "Bajo",
+  "anc.adaptive": "Adaptativo",
+  "anc.off": "Off",
+  "anc.transparency": "Transparencia",
+
+  "bass.header": "Graves",
+  "bass.toggle": "Graves",
+  "bass.level": "Nivel",
+
+  "latency.header": "Baja latencia",
+  "latency.toggle": "Baja latencia",
+
+  "spatial.header": "Audio espacial",
+  "spatial.toggle": "Audio espacial",
+  "spatial.tracking": "Seguimiento de cabeza",
+
+  "eq.header": "Ecualizador",
+  "eq.balanced": "Balanceado",
+  "eq.more_bass": "Mas bajos",
+  "eq.more_treble": "Mas agudos",
+  "eq.voice": "Voz",
+  "eq.custom": "Personalizado"
+}

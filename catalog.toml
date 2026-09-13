@@ -10,3 +10,16 @@ deprecated   = false
 plugin_api   = 3
 tags         = ["screen"]
 dependencies = ["wl-mirror"]
+
+[[plugin]]
+id           = "evergaster/opennothing"
+name         = "Nothing Buds"
+version      = "1.0.0"
+author       = "evergaster"
+license      = "MIT"
+icon         = "ear"
+description  = "Control Nothing/CMF buds (ANC, bass boost, low latency, spatial audio, EQ) and show battery, via the openNothing CLI."
+deprecated   = false
+plugin_api   = 24
+tags         = ["audio", "bluetooth", "utility", "indicator"]
+dependencies = ["opennothing"]

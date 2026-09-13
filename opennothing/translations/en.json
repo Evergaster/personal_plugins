@@ -1,0 +1,56 @@
+{
+  "settings.command.label": "Command",
+  "settings.command.description": "Path or name of the openNothing executable (must be in PATH).",
+  "settings.mac.label": "Bluetooth MAC",
+  "settings.mac.description": "MAC address of the Nothing/CMF buds.",
+  "settings.channel.label": "RFCOMM channel",
+  "settings.channel.description": "RFCOMM channel used by the SPP connection (default 15).",
+  "settings.model.label": "Model ID",
+  "settings.model.description": "Model identifier shown by openNothing (e.g. B172).",
+  "settings.timeout.label": "Timeout (s)",
+  "settings.timeout.description": "Seconds to wait for a Bluetooth response.",
+  "settings.poll_interval_ms.label": "Poll interval (ms)",
+  "settings.poll_interval_ms.description": "How often to query the device status.",
+  "settings.scripted.label": "Scripted mode",
+  "settings.scripted.description": "Run openNothing in demo mode (no Bluetooth needed).",
+  "settings.show_percent.label": "Show percentages",
+  "settings.show_percent.description": "Display battery percentages in the bar widget.",
+  "settings.low_battery_threshold.label": "Low battery threshold",
+  "settings.low_battery_threshold.description": "Battery percentage to flag as low.",
+
+  "ui.title": "Nothing Buds",
+  "ui.disconnected": "Disconnected",
+  "ui.refresh": "Refresh",
+  "ui.updating": "Updating",
+
+  "battery.header": "Battery",
+  "battery.left": "Left",
+  "battery.right": "Right",
+  "battery.case": "Case",
+
+  "anc.header": "ANC",
+  "anc.high": "High",
+  "anc.mid": "Mid",
+  "anc.low": "Low",
+  "anc.adaptive": "Adaptive",
+  "anc.off": "Off",
+  "anc.transparency": "Transparency",
+
+  "bass.header": "Bass boost",
+  "bass.toggle": "Bass boost",
+  "bass.level": "Level",
+
+  "latency.header": "Low latency",
+  "latency.toggle": "Low latency",
+
+  "spatial.header": "Spatial audio",
+  "spatial.toggle": "Spatial audio",
+  "spatial.tracking": "Head tracking",
+
+  "eq.header": "EQ",
+  "eq.balanced": "Balanced",
+  "eq.more_bass": "More bass",
+  "eq.more_treble": "More treble",
+  "eq.voice": "Voice",
+  "eq.custom": "Custom"
+}
