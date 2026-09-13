@@ -89,7 +89,21 @@ end
 noctalia.state.watch(SNAPSHOT, function(val)
   if type(val) == "table" then
     snap = val
-    render()
+    pcall(noctalia.log, string.format(
+      "[opennothing:widget] watch available=%s battery=L:%s R:%s C:%s",
+      tostring(val.available),
+      tostring(val.battery and val.battery.left),
+      tostring(val.battery and val.battery.right),
+      tostring(val.battery and val.battery.case)
+    ))
+render()
+pcall(noctalia.log, string.format(
+  "[opennothing:widget] initial available=%s battery=L:%s R:%s C:%s",
+  tostring(snap.available),
+  tostring(snap.battery and snap.battery.left),
+  tostring(snap.battery and snap.battery.right),
+  tostring(snap.battery and snap.battery.case)
+))
   end
 end)
 

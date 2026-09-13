@@ -51,8 +51,23 @@ local function trim(s)
   return ((s or ""):gsub("^%s+", ""):gsub("%s+$", ""))
 end
 
+local function dbg(msg)
+  pcall(noctalia.log, "[opennothing] " .. tostring(msg))
+end
+
 local function publish()
   noctalia.state.set(SNAPSHOT, snapshot)
+  dbg(string.format(
+    "publish available=%s battery=L:%s R:%s C:%s anc=%s model=%s busying=%s err=%s",
+    tostring(snapshot.available),
+    tostring(snapshot.battery.left),
+    tostring(snapshot.battery.right),
+    tostring(snapshot.battery.case),
+    tostring(snapshot.anc),
+    tostring(snapshot.model),
+    tostring(snapshot.busy),
+    tostring(snapshot.lastError)
+  ))
 end
 
 local function baseArgs()
@@ -147,6 +162,12 @@ readStatus = function()
   local args = baseArgs()
   table.insert(args, "status")
   run(args, function(result)
+    local raw = tostring(result.stdout or "")
+    local errText = tostring(result.stderr or "")
+    if #errText > 0 then
+      raw = raw .. " [stderr=" .. errText .. "]"
+    end
+    dbg("status exit=" .. tostring(result.exitCode) .. " out=" .. raw)
     if result.exitCode == 0 then
       local o = parseStatus(result.stdout or "")
       snapshot.model = o.model or snapshot.model
@@ -159,6 +180,14 @@ readStatus = function()
         snapshot.available = true
         snapshot.lastError = ""
       end
+      dbg(string.format(
+        "status parsed modelo=%s anc=%s batL=%s batR=%s batC=%s",
+        tostring(snapshot.model),
+        tostring(snapshot.anc),
+        tostring(snapshot.battery.left),
+        tostring(snapshot.battery.right),
+        tostring(snapshot.battery.case)
+      ))
     end
     publish()
   end)
@@ -218,7 +247,7 @@ readSpatial = function()
   table.insert(args, "spatial-audio")
   run(args, function(result)
     if result.exitCode == 0 then
-      local v, tr = (result.stdout or ""):match("^spatial:%s*(on|off)%s+tracking=(on|off)")
+      local v, tr = (result.stdout or ""):match("^spatial:%s*(on|off)%s+tracking=(%S+)")
       if v then
         snapshot.spatial = v == "on"
         snapshot.tracking = tr == "on"

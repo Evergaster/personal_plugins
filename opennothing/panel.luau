@@ -265,6 +265,14 @@ end
 
 function onOpen(_context)
   snap = noctalia.state.get(SNAPSHOT) or snap
+  pcall(noctalia.log, string.format(
+    "[opennothing:panel] onOpen available=%s battery=L:%s R:%s C:%s anc=%s",
+    tostring(snap.available),
+    tostring(snap.battery and snap.battery.left),
+    tostring(snap.battery and snap.battery.right),
+    tostring(snap.battery and snap.battery.case),
+    tostring(snap.anc)
+  ))
   render()
   send({ action = "read_all" })
 end
