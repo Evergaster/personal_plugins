@@ -131,7 +131,10 @@ run = function(args, onDone)
       snapshot.lastError = err ~= "" and err or ("salida " .. tostring(result.exitCode))
       snapshot.available = false
     end
-    onDone(result)
+    local perr, merr = pcall(onDone, result)
+    if not perr then
+      dbg("read callback error: " .. tostring(merr))
+    end
     process()
   end)
   if not ok then
@@ -152,8 +155,10 @@ local function parseStatus(stdout)
     if m then o.firmware = trim(m) end
     m = line:match("^ANC:%s*(%S+)")
     if m then o.anc = trim(m) end
-    local side, pct = line:match("^bateria%s+(left|right|case):%s*(%d+)%%")
-    if side then o.battery[side] = tonumber(pct) end
+    local side, pct = line:match("^bateria%s+(%a+):%s*(%d+)%%")
+    if side and (side == "left" or side == "right" or side == "case") then
+      o.battery[side] = tonumber(pct)
+    end
   end
   return o
 end
@@ -203,6 +208,8 @@ readAnc = function()
         snapshot.anc = name
         snapshot.available = true
         snapshot.lastError = ""
+      else
+        dbg("anc no parse: " .. tostring(result.stdout or ""))
       end
     end
     publish()
@@ -214,11 +221,13 @@ readLowLatency = function()
   table.insert(args, "low-latency")
   run(args, function(result)
     if result.exitCode == 0 then
-      local v = (result.stdout or ""):match("^low%-latency:%s*(on|off)")
+      local v = (result.stdout or ""):match("^low%-latency:%s*(%a+)")
       if v then
         snapshot.lowLatency = v == "on"
         snapshot.available = true
         snapshot.lastError = ""
+      else
+        dbg("low-latency no parse: " .. tostring(result.stdout or ""))
       end
     end
     publish()
@@ -230,12 +239,14 @@ readBass = function()
   table.insert(args, "bass-boost")
   run(args, function(result)
     if result.exitCode == 0 then
-      local v, lvl = (result.stdout or ""):match("^bass%-boost:%s*(on|off)%s+nivel=(%d+)")
+      local v, lvl = (result.stdout or ""):match("^bass%-boost:%s*(%a+)%s+nivel=(%d+)")
       if v then
         snapshot.bassBoost = v == "on"
         snapshot.bassLevel = tonumber(lvl) or snapshot.bassLevel
         snapshot.available = true
         snapshot.lastError = ""
+      else
+        dbg("bass no parse: " .. tostring(result.stdout or ""))
       end
     end
     publish()
@@ -247,12 +258,14 @@ readSpatial = function()
   table.insert(args, "spatial-audio")
   run(args, function(result)
     if result.exitCode == 0 then
-      local v, tr = (result.stdout or ""):match("^spatial:%s*(on|off)%s+tracking=(%S+)")
+      local v, tr = (result.stdout or ""):match("^spatial:%s*(%a+)%s+tracking=(%S+)")
       if v then
         snapshot.spatial = v == "on"
         snapshot.tracking = tr == "on"
         snapshot.available = true
         snapshot.lastError = ""
+      else
+        dbg("spatial no parse: " .. tostring(result.stdout or ""))
       end
     end
     publish()
@@ -269,6 +282,8 @@ readEq = function()
         snapshot.eq = trim(name)
         snapshot.available = true
         snapshot.lastError = ""
+      else
+        dbg("eq no parse: " .. tostring(result.stdout or ""))
       end
     end
     publish()
@@ -407,7 +422,7 @@ noctalia.state.watch(COMMAND, function(msg)
 end)
 
 local function poll()
-  enqueue({ action = "read_status" })
+  enqueue({ action = "read_all" })
 end
 
 local pollMs = tonumber(noctalia.getConfig("poll_interval_ms")) or 60000

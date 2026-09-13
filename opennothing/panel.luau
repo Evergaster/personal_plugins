@@ -153,7 +153,7 @@ local function render()
   local bassOn = snap.bassBoost == true
   local spatialOn = snap.spatial == true
 
-  panel.render(ui.column({ flexGrow = 1, gap = 14 }, {
+  panel.render(ui.column({ flexGrow = 1, gap = 10 }, {
     ui.row({ align = "center", justify = "space_between", gap = 8 }, {
       ui.row({ align = "center", gap = 6 }, {
         ui.glyph({ name = "ear", color = "primary", size = 18 }),
@@ -165,91 +165,95 @@ local function render()
       }),
     }),
 
-    ui.column({ gap = 6 }, {
-      sectionTitle(noctalia.tr("battery.header")),
-      ui.row({ gap = 8 }, {
-        batteryCell(noctalia.tr("battery.left"), "left"),
-        batteryCell(noctalia.tr("battery.right"), "right"),
-        batteryCell(noctalia.tr("battery.case"), "case"),
-      }),
-    }),
+    ui.scroll({ flexGrow = 1, gap = 14 }, {
 
-    ui.separator({ thickness = 1, color = "surface_variant" }),
-
-    ui.column({ gap = 6 }, {
-      sectionTitle(noctalia.tr("anc.header")),
-      ui.select({
-        options = labelTexts(ANC_OPTIONS),
-        selectedIndex = ancIndex(snap.anc),
-        placeholder = noctalia.tr("anc.header"),
-        enabled = not busy,
-        onChange = "onAncSelect",
-      }),
-    }),
-
-    ui.separator({ thickness = 1, color = "surface_variant" }),
-
-    ui.column({ gap = 6 }, {
-      sectionTitle(noctalia.tr("bass.header")),
-      ui.row({ align = "center", gap = 8 }, {
-        ui.toggle({ checked = bassOn, enabled = not busy, onChange = "onBassToggle" }),
-        ui.label({ text = noctalia.tr("bass.toggle"), flexGrow = 1 }),
-      }),
-      ui.row({ align = "center", gap = 8 }, {
-        ui.label({ text = noctalia.tr("bass.level"), width = 56, color = "on_surface_variant", fontSize = 12 }),
-        ui.slider({
-          min = 0,
-          max = 10,
-          step = 1,
-          value = snap.bassLevel or 0,
-          enabled = not busy and bassOn,
-          onChange = "onBassLevel",
-        }),
-        ui.label({
-          text = tostring(snap.bassLevel or 0),
-          width = 24,
-          color = "on_surface_variant",
-          fontSize = 12,
-          textAlign = "end",
+      ui.column({ gap = 6 }, {
+        sectionTitle(noctalia.tr("battery.header")),
+        ui.row({ gap = 8 }, {
+          batteryCell(noctalia.tr("battery.left"), "left"),
+          batteryCell(noctalia.tr("battery.right"), "right"),
+          batteryCell(noctalia.tr("battery.case"), "case"),
         }),
       }),
-    }),
 
-    ui.separator({ thickness = 1, color = "surface_variant" }),
+      ui.separator({ thickness = 1, color = "surface_variant" }),
 
-    ui.column({ gap = 6 }, {
-      sectionTitle(noctalia.tr("latency.header")),
-      ui.row({ align = "center", gap = 8 }, {
-        ui.toggle({ checked = snap.lowLatency == true, enabled = not busy, onChange = "onLowLatencyToggle" }),
-        ui.label({ text = noctalia.tr("latency.toggle"), flexGrow = 1 }),
+      ui.column({ gap = 6 }, {
+        sectionTitle(noctalia.tr("anc.header")),
+        ui.select({
+          options = labelTexts(ANC_OPTIONS),
+          selectedIndex = ancIndex(snap.anc),
+          placeholder = noctalia.tr("anc.header"),
+          enabled = not busy,
+          onChange = "onAncSelect",
+        }),
       }),
-    }),
 
-    ui.separator({ thickness = 1, color = "surface_variant" }),
+      ui.separator({ thickness = 1, color = "surface_variant" }),
 
-    ui.column({ gap = 6 }, {
-      sectionTitle(noctalia.tr("spatial.header")),
-      ui.row({ align = "center", gap = 8 }, {
-        ui.toggle({ checked = spatialOn, enabled = not busy, onChange = "onSpatialToggle" }),
-        ui.label({ text = noctalia.tr("spatial.toggle"), flexGrow = 1 }),
+      ui.column({ gap = 6 }, {
+        sectionTitle(noctalia.tr("bass.header")),
+        ui.row({ align = "center", gap = 8 }, {
+          ui.toggle({ checked = bassOn, enabled = not busy, onChange = "onBassToggle" }),
+          ui.label({ text = noctalia.tr("bass.toggle"), flexGrow = 1 }),
+        }),
+        ui.row({ align = "center", gap = 8 }, {
+          ui.label({ text = noctalia.tr("bass.level"), width = 56, color = "on_surface_variant", fontSize = 12 }),
+          ui.slider({
+            min = 0,
+            max = 10,
+            step = 1,
+            value = snap.bassLevel or 0,
+            enabled = not busy and bassOn,
+            onChange = "onBassLevel",
+          }),
+          ui.label({
+            text = tostring(snap.bassLevel or 0),
+            width = 24,
+            color = "on_surface_variant",
+            fontSize = 12,
+            textAlign = "end",
+          }),
+        }),
       }),
-      ui.row({ align = "center", gap = 8 }, {
-        ui.toggle({ checked = snap.tracking == true, enabled = not busy and spatialOn, onChange = "onTrackingToggle" }),
-        ui.label({ text = noctalia.tr("spatial.tracking"), flexGrow = 1 }),
-      }),
-    }),
 
-    ui.separator({ thickness = 1, color = "surface_variant" }),
+      ui.separator({ thickness = 1, color = "surface_variant" }),
 
-    ui.column({ gap = 6 }, {
-      sectionTitle(noctalia.tr("eq.header")),
-      ui.select({
-        options = labelTexts(EQ_OPTIONS),
-        selectedIndex = eqIndex(snap.eq),
-        placeholder = noctalia.tr("eq.header"),
-        enabled = not busy,
-        onChange = "onEqSelect",
+      ui.column({ gap = 6 }, {
+        sectionTitle(noctalia.tr("latency.header")),
+        ui.row({ align = "center", gap = 8 }, {
+          ui.toggle({ checked = snap.lowLatency == true, enabled = not busy, onChange = "onLowLatencyToggle" }),
+          ui.label({ text = noctalia.tr("latency.toggle"), flexGrow = 1 }),
+        }),
       }),
+
+      ui.separator({ thickness = 1, color = "surface_variant" }),
+
+      ui.column({ gap = 6 }, {
+        sectionTitle(noctalia.tr("spatial.header")),
+        ui.row({ align = "center", gap = 8 }, {
+          ui.toggle({ checked = spatialOn, enabled = not busy, onChange = "onSpatialToggle" }),
+          ui.label({ text = noctalia.tr("spatial.toggle"), flexGrow = 1 }),
+        }),
+        ui.row({ align = "center", gap = 8 }, {
+          ui.toggle({ checked = snap.tracking == true, enabled = not busy and spatialOn, onChange = "onTrackingToggle" }),
+          ui.label({ text = noctalia.tr("spatial.tracking"), flexGrow = 1 }),
+        }),
+      }),
+
+      ui.separator({ thickness = 1, color = "surface_variant" }),
+
+      ui.column({ gap = 6 }, {
+        sectionTitle(noctalia.tr("eq.header")),
+        ui.select({
+          options = labelTexts(EQ_OPTIONS),
+          selectedIndex = eqIndex(snap.eq),
+          placeholder = noctalia.tr("eq.header"),
+          enabled = not busy,
+          onChange = "onEqSelect",
+        }),
+      }),
+
     }),
 
     ui.row({ gap = 8, align = "center" }, {
