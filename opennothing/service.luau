@@ -28,6 +28,25 @@ local snapshot = {
 local queue = {}
 local busy = false
 
+-- Declaraciones previas: hay referencias circulares (run -> process ->
+-- runCommand -> read/set -> run), asi que todos los helpers se reasignan
+-- abajo con `local function`.
+local process
+local run
+local runCommand
+local finishBusy
+local readStatus
+local readAnc
+local readLowLatency
+local readBass
+local readSpatial
+local readEq
+local setAnc
+local setLowLatency
+local setBass
+local setSpatial
+local setEq
+
 local function trim(s)
   return ((s or ""):gsub("^%s+", ""):gsub("%s+$", ""))
 end
@@ -55,38 +74,9 @@ local function enqueue(item)
   process()
 end
 
-local function runCommand(item)
-  local action = tostring(item.action or "")
-  if action == "read_status" then
-    readStatus()
-  elseif action == "read_anc" then
-    readAnc()
-  elseif action == "read_low_latency" then
-    readLowLatency()
-  elseif action == "read_bass" then
-    readBass()
-  elseif action == "read_spatial" then
-    readSpatial()
-  elseif action == "read_eq" then
-    readEq()
-  elseif action == "set_anc" then
-    setAnc(item.mode)
-  elseif action == "set_low_latency" then
-    setLowLatency(item.value == true)
-  elseif action == "set_bass" then
-    setBass(item.value == true, item.level)
-  elseif action == "set_spatial" then
-    setSpatial(item.value == true, item.tracking)
-  elseif action == "set_eq" then
-    setEq(item.preset)
-  else
-    finishBusy()
-  end
-end
-
 -- Solo un comando a la vez (el canal RFCOMM no soporta concurrencia).
 -- "read_all" se expande en la cadena ordenada de lecturas, en la cola.
-local function process()
+process = function()
   if busy then
     return
   end
@@ -118,12 +108,7 @@ local function process()
   runCommand(item)
 end
 
-local function finishBusy()
-  busy = false
-  process()
-end
-
-local function run(args, onDone)
+run = function(args, onDone)
   local ok = noctalia.runAsync(args, function(result)
     busy = false
     if result.exitCode ~= 0 then
@@ -158,7 +143,7 @@ local function parseStatus(stdout)
   return o
 end
 
-local function readStatus()
+readStatus = function()
   local args = baseArgs()
   table.insert(args, "status")
   run(args, function(result)
@@ -179,7 +164,7 @@ local function readStatus()
   end)
 end
 
-local function readAnc()
+readAnc = function()
   local args = baseArgs()
   table.insert(args, "anc")
   run(args, function(result)
@@ -195,7 +180,7 @@ local function readAnc()
   end)
 end
 
-local function readLowLatency()
+readLowLatency = function()
   local args = baseArgs()
   table.insert(args, "low-latency")
   run(args, function(result)
@@ -211,7 +196,7 @@ local function readLowLatency()
   end)
 end
 
-local function readBass()
+readBass = function()
   local args = baseArgs()
   table.insert(args, "bass-boost")
   run(args, function(result)
@@ -228,7 +213,7 @@ local function readBass()
   end)
 end
 
-local function readSpatial()
+readSpatial = function()
   local args = baseArgs()
   table.insert(args, "spatial-audio")
   run(args, function(result)
@@ -245,7 +230,7 @@ local function readSpatial()
   end)
 end
 
-local function readEq()
+readEq = function()
   local args = baseArgs()
   table.insert(args, "eq")
   run(args, function(result)
@@ -261,7 +246,7 @@ local function readEq()
   end)
 end
 
-local function setAnc(mode)
+setAnc = function(mode)
   local args = baseArgs()
   table.insert(args, "anc")
   table.insert(args, tostring(mode))
@@ -278,7 +263,7 @@ local function setAnc(mode)
   end)
 end
 
-local function setLowLatency(value)
+setLowLatency = function(value)
   local args = baseArgs()
   table.insert(args, "low-latency")
   table.insert(args, value and "on" or "off")
@@ -292,7 +277,7 @@ local function setLowLatency(value)
   end)
 end
 
-local function setBass(value, level)
+setBass = function(value, level)
   local args = baseArgs()
   table.insert(args, "bass-boost")
   table.insert(args, value and "on" or "off")
@@ -313,7 +298,7 @@ local function setBass(value, level)
   end)
 end
 
-local function setSpatial(value, tracking)
+setSpatial = function(value, tracking)
   local args = baseArgs()
   table.insert(args, "spatial-audio")
   table.insert(args, value and "on" or "off")
@@ -334,7 +319,7 @@ local function setSpatial(value, tracking)
   end)
 end
 
-local function setEq(preset)
+setEq = function(preset)
   local args = baseArgs()
   table.insert(args, "eq")
   table.insert(args, tostring(preset))
@@ -349,6 +334,40 @@ local function setEq(preset)
     end
     publish()
   end)
+end
+
+finishBusy = function()
+  busy = false
+  process()
+end
+
+runCommand = function(item)
+  local action = tostring(item.action or "")
+  if action == "read_status" then
+    readStatus()
+  elseif action == "read_anc" then
+    readAnc()
+  elseif action == "read_low_latency" then
+    readLowLatency()
+  elseif action == "read_bass" then
+    readBass()
+  elseif action == "read_spatial" then
+    readSpatial()
+  elseif action == "read_eq" then
+    readEq()
+  elseif action == "set_anc" then
+    setAnc(item.mode)
+  elseif action == "set_low_latency" then
+    setLowLatency(item.value == true)
+  elseif action == "set_bass" then
+    setBass(item.value == true, item.level)
+  elseif action == "set_spatial" then
+    setSpatial(item.value == true, item.tracking)
+  elseif action == "set_eq" then
+    setEq(item.preset)
+  else
+    finishBusy()
+  end
 end
 
 -- Entradas que llegan desde widget/panel.

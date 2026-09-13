@@ -202,7 +202,6 @@ local function render()
           max = 10,
           step = 1,
           value = snap.bassLevel or 0,
-          flexible = true,
           enabled = not busy and bassOn,
           onChange = "onBassLevel",
         }),
@@ -253,7 +252,7 @@ local function render()
       }),
     }),
 
-    ui.row({ gap = 8, align = "center", paddingTop = 2 }, {
+    ui.row({ gap = 8, align = "center" }, {
       ui.glyph({
         name = "ear",
         size = 14,
