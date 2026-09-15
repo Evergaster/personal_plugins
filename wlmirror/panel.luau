@@ -61,6 +61,11 @@ local function startMirror(source, destination)
     return
   end
 
+  if source == destination then
+    noctalia.notifyError("WL Mirror", "El origen y el destino son la misma salida")
+    return
+  end
+
   local args = ""
   if fullscreen then
     args = " --fullscreen"
@@ -82,7 +87,29 @@ local function startMirror(source, destination)
     ))
   elseif destination and noctalia.commandExists("umbriel") then
     noctalia.runAsync(string.format("setsid wl-mirror%s %s >/dev/null 2>&1 &", args, source))
-    noctalia.runAsync(string.format("sleep 1 && umbriel msg window-move-to-output-next 2>/dev/null"))
+    noctalia.runAsync([[
+      WID=""
+      i=0
+      while [ "$i" -lt 25 ]; do
+        if command -v jq >/dev/null 2>&1; then
+          WID=$(umbriel windows --json 2>/dev/null | jq -r '.[] | select((.app_id=="wl-mirror") or (.title|contains("wl-mirror"))) | .id' 2>/dev/null | head -n1)
+        else
+          WID=$(umbriel windows --json 2>/dev/null | python3 -c 'import json,sys
+for w in json.load(sys.stdin):
+    if w.get("app_id") == "wl-mirror" or "wl-mirror" in w.get("title", ""):
+        print(w.get("id", ""))
+        break' 2>/dev/null | head -n1)
+        fi
+        [ -n "$WID" ] && break
+        sleep 0.2
+        i=$((i+1))
+      done
+      if [ -n "$WID" ]; then
+        umbriel msg "window-focus:$WID" >/dev/null 2>&1
+        sleep 0.2
+        umbriel msg "window-move-to-output-next" >/dev/null 2>&1
+      fi
+    ]])
   else
     noctalia.runAsync(string.format("setsid wl-mirror%s %s >/dev/null 2>&1 &", args, source))
   end

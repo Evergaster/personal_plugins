@@ -22,7 +22,7 @@ The plugin detects the active compositor and uses its IPC to place the mirrored 
 
 - **Niri** — uses `niri msg action focus-monitor` to focus the destination before launching wl-mirror
 - **Hyprland** — uses `hyprctl dispatch` to move the wl-mirror window to the target monitor
-- **Umbriel** — uses `umbriel msg window-move-to-output-next` to move the wl-mirror window to the next output
+- **Umbriel** — resolves the wl-mirror window by id from `umbriel windows --json`, focuses it, then uses `umbriel msg window-move-to-output-next` to relocate it to the destination output
 - **Generic** — launches wl-mirror without window placement (mirrors on the focused output)
 
 ## Requirements
