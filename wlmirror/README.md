@@ -16,6 +16,15 @@ Add the **Mirror** widget from **Settings → Bar → Add Widget**. Click the wi
 - **Mirror** — Lists all connected outputs. Click an output to start mirroring it. Click again to stop.
 - **Window** — Click "Select Window" to use the xdg-desktop-portal window picker (requires a portal backend like `xdg-desktop-portal-hyprland` or `xdg-desktop-portal-wlr`).
 
+## Supported Compositors
+
+The plugin detects the active compositor and uses its IPC to place the mirrored window on the destination output:
+
+- **Niri** — uses `niri msg action focus-monitor` to focus the destination before launching wl-mirror
+- **Hyprland** — uses `hyprctl dispatch` to move the wl-mirror window to the target monitor
+- **Umbriel** — uses `umbriel msg window-move-to-output-next` to move the wl-mirror window to the next output
+- **Generic** — launches wl-mirror without window placement (mirrors on the focused output)
+
 ## Requirements
 
 - `wl-mirror` must be installed and available on `PATH`.

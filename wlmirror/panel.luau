@@ -80,6 +80,9 @@ local function startMirror(source, destination)
       "sleep 2 && hyprctl dispatch focuswindow 'wl-mirror' 2>/dev/null && hyprctl dispatch movewindow 'monitor:%s' 2>/dev/null",
       destination
     ))
+  elseif destination and noctalia.commandExists("umbriel") then
+    noctalia.runAsync(string.format("setsid wl-mirror%s %s >/dev/null 2>&1 &", args, source))
+    noctalia.runAsync(string.format("sleep 1 && umbriel msg window-move-to-output-next 2>/dev/null"))
   else
     noctalia.runAsync(string.format("setsid wl-mirror%s %s >/dev/null 2>&1 &", args, source))
   end
