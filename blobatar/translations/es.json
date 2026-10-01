@@ -1,0 +1,136 @@
+{
+  "settings": {
+    "name": {
+      "label": "Nombre",
+      "description": "La cadena que Blobatar convierte en una forma. También se puede cambiar desde el panel."
+    },
+    "size": {
+      "label": "Tamaño del avatar",
+      "description": "Tamaño en píxeles. Mayor es más nítido, a costa de un archivo más pesado."
+    },
+    "background": {
+      "label": "Fondo",
+      "description": "Forma dibujada detrás del blob. 'Ninguno' deja ver el escritorio a través de él.",
+      "options": {
+        "none": "Ninguno",
+        "square": "Cuadrado",
+        "circle": "Círculo",
+        "squircle": "Cuadrado redondeado"
+      }
+    },
+    "gen": {
+      "label": "Generación",
+      "description": "Fija el mapeo nombre-a-blobatar. Una generación fijada nunca cambia, así que tu mascota conservará siempre la misma forma.",
+      "options": {
+        "1": "1",
+        "2": "2"
+      }
+    },
+    "lock_hue": {
+      "label": "Fijar tono de color",
+      "description": "Usar un color fijo en lugar del derivado del nombre."
+    },
+    "hue": {
+      "label": "Matiz",
+      "description": "Color en grados, 0-360."
+    },
+    "lock_tone": {
+      "label": "Fijar tonalidad",
+      "description": "Usar una tonalidad fija en lugar de la derivada del nombre."
+    },
+    "tone": {
+      "label": "Tonalidad",
+      "description": "Tonalidad de 0 (claro) a 100 (tinta)."
+    },
+    "reactions": {
+      "label": "Reacciones",
+      "description": "Dejar que la expresión siga a la batería, CPU, RAM y el modo no molestar. Si se desactiva, la mascota solo reacciona al temporizador de enfoque."
+    },
+    "pomodoro_minutes": {
+      "label": "Duración del enfoque",
+      "description": "Duración de una sesión de enfoque, en minutos."
+    },
+    "notify": {
+      "label": "Notificar",
+      "description": "Enviar una notificación cuando termine una sesión de enfoque."
+    },
+    "widget_size": {
+      "label": "Tamaño del widget",
+      "description": "Tamaño del blob en el escritorio, en píxeles."
+    },
+    "animate": {
+      "label": "Animar",
+      "description": "Movimiento de respiración y un aplastamiento cada vez que cambia la expresión."
+    },
+    "show_progress": {
+      "label": "Mostrar barra de progreso",
+      "description": "Dibujar una barra de progreso bajo el blob durante una sesión de enfoque."
+    },
+    "show_status": {
+      "label": "Mostrar estado",
+      "description": "Mostrar una línea de texto bajo el blob."
+    },
+    "accent": {
+      "label": "Color de acento",
+      "description": "Color de la barra de progreso del enfoque."
+    }
+  },
+  "ui": {
+    "apply": "Aplicar",
+    "use_setting": "Usar ajuste",
+    "name_placeholder": "Nombre",
+    "focus": "Enfoque",
+    "start": "Empezar",
+    "pause": "Pausar",
+    "resume": "Reanudar",
+    "reset": "Reiniciar",
+    "idle_label": "Inactivo",
+    "mood": "Expresión",
+    "expression_auto": "Automática",
+    "machine": "Máquina",
+    "unknown": "?",
+    "battery_level": "Batería {value}%",
+    "battery_charging": "Batería {value}% (cargando)",
+    "cpu_value": "CPU {value}%",
+    "ram_value": "RAM {value}%",
+    "dnd_on": "El modo no molestar está activo",
+    "dnd_off": "El modo no molestar está desactivado",
+    "status_offline": "sin conexión",
+    "status_paused": "en pausa",
+    "status_done": "¡listo!",
+    "status_dnd": "no molestar",
+    "offline_warning": "No se pudo contactar con blobatar.dev. La mascota conserva el último avatar descargado.",
+    "notify_title": "Blobatar",
+    "notify_body": "Sesión de enfoque completada. Buen trabajo."
+  },
+  "expression": {
+    "idle": "Inactivo",
+    "happy": "Feliz",
+    "sad": "Triste",
+    "mad": "Enfadado",
+    "surprised": "Sorprendido",
+    "wink": "Guiño",
+    "sleepy": "Somnoliento",
+    "smug": "Engreído",
+    "unsure": "Inseguro",
+    "scared": "Asustado",
+    "love": "Enamorado",
+    "shy": "Tímido",
+    "sick": "Enfermo",
+    "thinking": "Pensativo"
+  },
+  "reason": {
+    "idle": "Solo pasando el rato.",
+    "manual": "Tú elegiste esta.",
+    "poke": "Eso hizo cosquillas.",
+    "focus": "Concentrado.",
+    "focus_done": "Sesión de enfoque terminada.",
+    "focus_paused": "Enfoque en pausa.",
+    "dnd": "El modo no molestar está activo.",
+    "battery_low": "La batería se está agotando.",
+    "battery_critical": "La batería está casi vacía.",
+    "cpu_high": "La CPU está echando humo.",
+    "ram_high": "La memoria está casi llena.",
+    "relaxed": "No está pasando gran cosa."
+  }
+}

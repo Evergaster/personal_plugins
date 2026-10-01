@@ -1,0 +1,136 @@
+{
+  "settings": {
+    "name": {
+      "label": "Name",
+      "description": "The string Blobatar turns into a shape. Can also be set from the plugin panel."
+    },
+    "size": {
+      "label": "Avatar size",
+      "description": "Rendered size in pixels. Higher is sharper, at the cost of a larger file."
+    },
+    "background": {
+      "label": "Background",
+      "description": "Shape drawn behind the blob. 'None' keeps the desktop visible through it.",
+      "options": {
+        "none": "None",
+        "square": "Square",
+        "circle": "Circle",
+        "squircle": "Squircle"
+      }
+    },
+    "gen": {
+      "label": "Generation",
+      "description": "Pins the name-to-blobatar mapping. A pinned generation never changes, so your pet stays the same shape forever.",
+      "options": {
+        "1": "1",
+        "2": "2"
+      }
+    },
+    "lock_hue": {
+      "label": "Lock hue",
+      "description": "Use a fixed colour instead of the one derived from the name."
+    },
+    "hue": {
+      "label": "Hue",
+      "description": "Colour in degrees, 0-360."
+    },
+    "lock_tone": {
+      "label": "Lock tone",
+      "description": "Use a fixed tone instead of the one derived from the name."
+    },
+    "tone": {
+      "label": "Tone",
+      "description": "Tone from 0 (pale) to 100 (ink)."
+    },
+    "reactions": {
+      "label": "Reactions",
+      "description": "Let the expression follow battery, CPU, RAM, and do-not-disturb. When off the pet only reacts to the focus timer."
+    },
+    "pomodoro_minutes": {
+      "label": "Focus length",
+      "description": "Length of one focus session, in minutes."
+    },
+    "notify": {
+      "label": "Notify",
+      "description": "Send a notification when a focus session finishes."
+    },
+    "widget_size": {
+      "label": "Widget size",
+      "description": "Size of the blob on the desktop, in pixels."
+    },
+    "animate": {
+      "label": "Animate",
+      "description": "Breathing motion, and a squash whenever the expression changes."
+    },
+    "show_progress": {
+      "label": "Show focus bar",
+      "description": "Draw a progress bar under the blob during a focus session."
+    },
+    "show_status": {
+      "label": "Show status",
+      "description": "Show a one-line caption under the blob."
+    },
+    "accent": {
+      "label": "Accent colour",
+      "description": "Colour of the focus progress bar."
+    }
+  },
+  "ui": {
+    "apply": "Apply",
+    "use_setting": "Use setting",
+    "name_placeholder": "Name",
+    "focus": "Focus",
+    "start": "Start",
+    "pause": "Pause",
+    "resume": "Resume",
+    "reset": "Reset",
+    "idle_label": "Idle",
+    "mood": "Expression",
+    "expression_auto": "Automatic",
+    "machine": "Machine",
+    "unknown": "?",
+    "battery_level": "Battery {value}%",
+    "battery_charging": "Battery {value}% (charging)",
+    "cpu_value": "CPU {value}%",
+    "ram_value": "RAM {value}%",
+    "dnd_on": "Do not disturb is on",
+    "dnd_off": "Do not disturb is off",
+    "status_offline": "offline",
+    "status_paused": "paused",
+    "status_done": "done!",
+    "status_dnd": "do not disturb",
+    "offline_warning": "Could not reach blobatar.dev. The pet keeps the last avatar it downloaded.",
+    "notify_title": "Blobatar",
+    "notify_body": "Focus session complete. Nice work."
+  },
+  "expression": {
+    "idle": "Idle",
+    "happy": "Happy",
+    "sad": "Sad",
+    "mad": "Mad",
+    "surprised": "Surprised",
+    "wink": "Wink",
+    "sleepy": "Sleepy",
+    "smug": "Smug",
+    "unsure": "Unsure",
+    "scared": "Scared",
+    "love": "Love",
+    "shy": "Shy",
+    "sick": "Sick",
+    "thinking": "Thinking"
+  },
+  "reason": {
+    "idle": "Just hanging out.",
+    "manual": "You picked this one.",
+    "poke": "That tickled.",
+    "focus": "Focusing.",
+    "focus_done": "Focus session done.",
+    "focus_paused": "Focus paused.",
+    "dnd": "Do not disturb is on.",
+    "battery_low": "Battery is getting low.",
+    "battery_critical": "Battery is nearly empty.",
+    "cpu_high": "The CPU is on fire.",
+    "ram_high": "Memory is nearly full.",
+    "relaxed": "Nothing much is happening."
+  }
+}

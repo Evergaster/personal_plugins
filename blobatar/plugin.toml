@@ -1,0 +1,186 @@
+# Blobatar desktop pet for Noctalia.
+#
+# A headless [[service]] decides the blob's expression from real machine state
+# (focus/pomodoro, battery, CPU, RAM, do-not-disturb) and owns the on-disk SVG
+# cache. The [[desktop_widget]] draws the blob and animates it; the [[panel]] is
+# the keyboard-capable control surface (name input, focus timer, expression
+# override). Widget and panel are pure clients of noctalia.state.
+#
+# The avatar itself is never drawn in Lua: identity and pose come from the
+# Blobatar service over HTTPS, and this plugin only picks *which* pose to ask
+# for, caches the SVG on disk, and hands the local path to ui.image.
+#
+# Requires outbound HTTPS to blobatar.dev. The generated SVG is a plain local
+# file, so rendering works offline once cached.
+
+id = "evergaster/blobatar"
+name = "Blobatar"
+version = "0.1.0"
+plugin_api = 24
+author = "evergaster"
+license = "MIT"
+dependencies = []
+tags = ["avatar", "pet", "focus", "utility", "desktop"]
+icon = "ghost"
+description = "A Blobatar desktop pet whose expression follows your focus timer, battery, CPU, RAM, and do-not-disturb state."
+
+# ── Global settings ──────────────────────────────────────────────────────────
+# Read by the service (and mirrored to the panel for display).
+
+[[setting]]
+key = "name"
+type = "string"
+label_key = "settings.name.label"
+description_key = "settings.name.description"
+default = "evergaster"
+
+[[setting]]
+key = "size"
+type = "int"
+label_key = "settings.size.label"
+description_key = "settings.size.description"
+default = 256
+min = 64
+max = 1024
+step = 64
+
+[[setting]]
+key = "background"
+type = "select"
+label_key = "settings.background.label"
+description_key = "settings.background.description"
+default = "none"
+options = [
+  { value = "none", label_key = "settings.background.options.none" },
+  { value = "square", label_key = "settings.background.options.square" },
+  { value = "circle", label_key = "settings.background.options.circle" },
+  { value = "squircle", label_key = "settings.background.options.squircle" },
+]
+
+[[setting]]
+key = "gen"
+type = "select"
+label_key = "settings.gen.label"
+description_key = "settings.gen.description"
+default = "2"
+options = [
+  { value = "1", label_key = "settings.gen.options.1" },
+  { value = "2", label_key = "settings.gen.options.2" },
+]
+
+[[setting]]
+key = "lock_hue"
+type = "bool"
+label_key = "settings.lock_hue.label"
+description_key = "settings.lock_hue.description"
+default = false
+
+[[setting]]
+key = "hue"
+type = "int"
+label_key = "settings.hue.label"
+description_key = "settings.hue.description"
+default = 0
+min = 0
+max = 360
+step = 5
+visible_when = { key = "lock_hue", values = [true] }
+
+[[setting]]
+key = "lock_tone"
+type = "bool"
+label_key = "settings.lock_tone.label"
+description_key = "settings.lock_tone.description"
+default = false
+
+[[setting]]
+key = "tone"
+type = "int"
+label_key = "settings.tone.label"
+description_key = "settings.tone.description"
+default = 50
+min = 0
+max = 100
+step = 5
+visible_when = { key = "lock_tone", values = [true] }
+
+[[setting]]
+key = "reactions"
+type = "bool"
+label_key = "settings.reactions.label"
+description_key = "settings.reactions.description"
+default = true
+
+[[setting]]
+key = "pomodoro_minutes"
+type = "int"
+label_key = "settings.pomodoro_minutes.label"
+description_key = "settings.pomodoro_minutes.description"
+default = 25
+min = 1
+max = 180
+step = 5
+
+[[setting]]
+key = "notify"
+type = "bool"
+label_key = "settings.notify.label"
+description_key = "settings.notify.description"
+default = true
+
+# ── Entries ──────────────────────────────────────────────────────────────────
+
+[[service]]
+id = "pet"
+entry = "service.luau"
+
+[[desktop_widget]]
+id = "desktop"
+entry = "desktop.luau"
+
+  [[desktop_widget.setting]]
+  key = "widget_size"
+  type = "int"
+  label_key = "settings.widget_size.label"
+  description_key = "settings.widget_size.description"
+  default = 128
+  min = 48
+  max = 512
+  step = 8
+
+  [[desktop_widget.setting]]
+  key = "animate"
+  type = "bool"
+  label_key = "settings.animate.label"
+  description_key = "settings.animate.description"
+  default = true
+
+  [[desktop_widget.setting]]
+  key = "show_progress"
+  type = "bool"
+  label_key = "settings.show_progress.label"
+  description_key = "settings.show_progress.description"
+  default = true
+
+  [[desktop_widget.setting]]
+  key = "show_status"
+  type = "bool"
+  label_key = "settings.show_status.label"
+  description_key = "settings.show_status.description"
+  default = true
+
+  [[desktop_widget.setting]]
+  key = "accent"
+  type = "color"
+  label_key = "settings.accent.label"
+  description_key = "settings.accent.description"
+  default = "primary"
+
+[[panel]]
+id = "panel"
+entry = "panel.luau"
+width = 320
+height = 420
+placement = "attached"
+position = "auto"
+open_near_click = true

@@ -23,3 +23,16 @@ deprecated   = false
 plugin_api   = 24
 tags         = ["audio", "bluetooth", "utility", "indicator"]
 dependencies = ["opennothing"]
+
+[[plugin]]
+id           = "evergaster/blobatar"
+name         = "Blobatar"
+version      = "0.1.0"
+author       = "evergaster"
+license      = "MIT"
+icon         = "ghost"
+description  = "A Blobatar desktop pet whose expression follows your focus timer, battery, CPU, RAM, and do-not-disturb state."
+deprecated   = false
+plugin_api   = 24
+tags         = ["avatar", "pet", "focus", "utility", "desktop"]
+dependencies = []
