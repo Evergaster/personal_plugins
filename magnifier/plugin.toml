@@ -5,7 +5,7 @@
 
 id           = "evergaster/magnifier"
 name         = "Magnifier"
-version      = "1.0.0"
+version      = "1.0.1"
 plugin_api   = 24
 author       = "evergaster"
 license      = "MIT"

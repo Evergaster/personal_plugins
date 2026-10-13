@@ -40,7 +40,7 @@ dependencies = []
 [[plugin]]
 id           = "evergaster/magnifier"
 name         = "Magnifier"
-version      = "1.0.0"
+version      = "1.0.1"
 author       = "evergaster"
 license      = "MIT"
 icon         = "zoom-in"

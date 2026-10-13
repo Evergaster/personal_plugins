@@ -42,7 +42,7 @@ project's own README.
 
 | Backend | Program | Documented flags | Zoom flag used |
 | --- | --- | --- | --- |
-| `maggie` (default) | `maggie` | `-z/--zoom`, `-d/--debug`, `--help`, `--version` | `-z <level>` |
+| `maggie` (default) | `maggie` | `-l/--log-filter`, `--help`, `--version` | not applied |
 | `hyprmag` | `hyprmag` | `-r/--radius`, `-s/--scale`, `-g/--draw-grid`, `--grid-colour` | `-s <level>` |
 | `wooz` | `wooz` | `--map-close`, `--mouse-track`, `--output`, `--zoom-in`, `--invert-scroll` | not applied |
 | `custom` | any command you write | — | — |
@@ -111,7 +111,7 @@ entry.
 | Setting | Type | Default | Description |
 | --- | --- | --- | --- |
 | `backend` | select | `maggie` | Which magnifier to launch: `maggie`, `hyprmag`, `wooz`, or `custom`. |
-| `zoom` | int (1–9) | `3` | Initial zoom. Passed as `-z` to Maggie and `-s` to hyprmag. Not applied to `wooz` (its documented flag takes a percentage, which has no defined 1–9 mapping) or to `custom`. |
+| `zoom` | int (1–9) | `3` | Initial zoom. Passed as `-s` to hyprmag. Not applied to Maggie (it exposes no zoom flag — only `-l/--log-filter`), nor to `wooz` (its documented flag takes a percentage, which has no defined 1–9 mapping), nor to `custom`. |
 | `binary_path` | file | *(empty)* | Optional path to the magnifier executable. Empty means "look up the backend's binary on `PATH`". |
 | `custom_command` | string | *(empty)* | Shell command run instead of a built-in backend. Only shown when `backend = custom`. Runs exactly as written — see [Notes](#notes). |
 | `delay_ms` | int (0–10000) | `150` | Wait before launching. Lets an open panel or popup close before the magnifier captures the screen. Set to `0` to launch immediately. |

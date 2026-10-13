@@ -9,7 +9,7 @@
   "settings.backend.options.wooz": "wooz",
   "settings.backend.options.custom": "Custom command",
   "settings.zoom.label": "Zoom level",
-  "settings.zoom.description": "Initial zoom, 1 to 9. Passed to Maggie as -z and to hyprmag as -s. Ignored by wooz and by custom commands.",
+  "settings.zoom.description": "Initial zoom, 1 to 9. Passed to hyprmag as -s. Ignored by Maggie (which exposes no zoom flag), wooz, and custom commands.",
   "settings.binary_path.label": "Binary path",
   "settings.binary_path.description": "Optional path to the magnifier executable. Leave empty to search PATH.",
   "settings.custom_command.label": "Custom command",

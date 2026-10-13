@@ -9,7 +9,7 @@
   "settings.backend.options.wooz": "wooz",
   "settings.backend.options.custom": "Comando personalizado",
   "settings.zoom.label": "Nivel de zoom",
-  "settings.zoom.description": "Zoom inicial, de 1 a 9. Se pasa a Maggie como -z y a hyprmag como -s. wooz y los comandos personalizados lo ignoran.",
+  "settings.zoom.description": "Zoom inicial, de 1 a 9. Se pasa a hyprmag como -s. Maggie (que no expone opción de zoom), wooz y los comandos personalizados lo ignoran.",
   "settings.binary_path.label": "Ruta del binario",
   "settings.binary_path.description": "Ruta opcional al ejecutable de la lupa. Déjala vacía para buscarlo en PATH.",
   "settings.custom_command.label": "Comando personalizado",

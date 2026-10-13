@@ -83,14 +83,12 @@ end
 
 -- Argument arrays run the program directly, with no shell parsing, so paths and
 -- numbers are passed verbatim. Only documented flags are used:
---   maggie  -z/--zoom <level>
+--   maggie  none                  (maggie exposes no zoom flag: only
+--                                  -l/--log-filter, --help, --version)
 --   hyprmag -s/--scale <factor>
 --   wooz    --zoom-in <PERCENT>   (no 1-9 level maps onto a percentage, so zoom
 --                                 is not applied to wooz)
 local function buildArguments(settings, program)
-  if settings.backend == "maggie" then
-    return { program, "-z", string.format("%d", settings.zoom) }
-  end
   if settings.backend == "hyprmag" then
     return { program, "-s", string.format("%d", settings.zoom) }
   end
