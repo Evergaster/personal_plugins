@@ -36,3 +36,16 @@ deprecated   = false
 plugin_api   = 24
 tags         = ["avatar", "pet", "focus", "utility", "desktop"]
 dependencies = []
+
+[[plugin]]
+id           = "evergaster/magnifier"
+name         = "Magnifier"
+version      = "1.0.0"
+author       = "evergaster"
+license      = "MIT"
+icon         = "zoom-in"
+description  = "Launch a Wayland screen magnifier (Maggie, hyprmag, wooz, or a custom command) from the bar or a keybind."
+deprecated   = false
+plugin_api   = 24
+tags         = ["bar", "shortcut", "utility"]
+dependencies = ["maggie", "hyprmag", "wooz"]
