@@ -11,9 +11,9 @@ missing.
 
 | Field | Value |
 | --- | --- |
-| ID | `yourname/magnifier` |
+| ID | `evergaster/magnifier` |
 | Entries | Bar widget: `launcher`; Control-center shortcut: `tile` |
-| IPC | `noctalia msg plugin yourname/magnifier:launcher focused open` |
+| IPC | `noctalia msg plugin evergaster/magnifier:launcher focused open` |
 
 ## Requirements
 
@@ -70,7 +70,7 @@ yourself.
 ## Enabling the plugin
 
 ```sh
-noctalia msg plugins enable yourname/magnifier
+noctalia msg plugins enable evergaster/magnifier
 ```
 
 To run it from a local checkout while developing, add the directory holding the
@@ -78,7 +78,7 @@ plugin as a source instead:
 
 ```sh
 noctalia msg plugins source add dev path ~/dev/community-plugins
-noctalia msg plugins enable yourname/magnifier
+noctalia msg plugins enable evergaster/magnifier
 ```
 
 Configure it from **Settings → Plugins** (the gear on the plugin's row). The
@@ -92,7 +92,7 @@ section where you want it. In `~/.config/noctalia/config.toml`:
 
 ```toml
 [widget.magnifier]
-type = "yourname/magnifier:launcher"
+type = "evergaster/magnifier:launcher"
 
 [bar.default]
 end = ["weather", "magnifier"]
@@ -122,7 +122,7 @@ The widget's `onIpc` handler accepts the `open` event, which does the same thing
 as a click:
 
 ```sh
-noctalia msg plugin yourname/magnifier:launcher focused open
+noctalia msg plugin evergaster/magnifier:launcher focused open
 ```
 
 `focused` targets the widget on the focused output; use `all` to reach every bar,
@@ -137,7 +137,7 @@ Hyprland `.conf` form is shown as an alternative.
 
 ```kdl
 binds {
-    Mod+Z { spawn-sh "noctalia msg plugin yourname/magnifier:launcher focused open"; }
+    Mod+Z { spawn-sh "noctalia msg plugin evergaster/magnifier:launcher focused open"; }
 }
 ```
 
@@ -147,20 +147,20 @@ With the Lua configuration Noctalia documents:
 
 ```lua
 local mainMod = "SUPER"
-hl.bind(mainMod .. "+Z", hl.dsp.exec_cmd("noctalia msg plugin yourname/magnifier:launcher focused open"))
+hl.bind(mainMod .. "+Z", hl.dsp.exec_cmd("noctalia msg plugin evergaster/magnifier:launcher focused open"))
 ```
 
 Classic `hyprland.conf` (not shown in Noctalia's docs, but it is the standard
 form):
 
 ```conf
-bind = SUPER, Z, exec, noctalia msg plugin yourname/magnifier:launcher focused open
+bind = SUPER, Z, exec, noctalia msg plugin evergaster/magnifier:launcher focused open
 ```
 
 ### Sway
 
 ```conf
-bindsym $mod+z exec noctalia msg plugin yourname/magnifier:launcher focused open
+bindsym $mod+z exec noctalia msg plugin evergaster/magnifier:launcher focused open
 ```
 
 ### Umbriel
@@ -169,7 +169,7 @@ In `~/.config/umbriel/config.toml`:
 
 ```toml
 [keybinds]
-"Mod+Z" = "spawn:noctalia msg plugin yourname/magnifier:launcher focused open"
+"Mod+Z" = "spawn:noctalia msg plugin evergaster/magnifier:launcher focused open"
 ```
 
 ## Publishing
@@ -195,9 +195,6 @@ noctalia.dev. It must be **960×540 WebP**. Generate it with the official tool:
 4. Open one PR for this plugin. CI validates the manifest, entry scripts,
    required files, and the thumbnail on every push. Bump `version` on every
    change.
-
-Before submitting, replace every `yourname` (in `plugin.toml`
-`id`/`author`, and in this README) with your own GitHub handle.
 
 ## Notes
 

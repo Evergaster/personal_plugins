@@ -2,14 +2,12 @@
 #
 # The plugin is only a launcher: it runs a magnifier you already installed and
 # tells you where to get it when the binary is missing. It ships no magnifier.
-#
-# Replace "yourname" with your GitHub handle before publishing (see README.md).
 
-id           = "yourname/magnifier"
+id           = "evergaster/magnifier"
 name         = "Magnifier"
 version      = "1.0.0"
 plugin_api   = 24
-author       = "yourname"
+author       = "evergaster"
 license      = "MIT"
 icon         = "zoom-in"
 description  = "Launch a Wayland screen magnifier (Maggie, hyprmag, wooz, or a custom command) from the bar or a keybind."
