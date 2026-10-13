@@ -1,0 +1,75 @@
+# Magnifier — launch a Wayland screen magnifier from Noctalia.
+#
+# The plugin is only a launcher: it runs a magnifier you already installed and
+# tells you where to get it when the binary is missing. It ships no magnifier.
+#
+# Replace "yourname" with your GitHub handle before publishing (see README.md).
+
+id           = "yourname/magnifier"
+name         = "Magnifier"
+version      = "1.0.0"
+plugin_api   = 24
+author       = "yourname"
+license      = "MIT"
+icon         = "zoom-in"
+description  = "Launch a Wayland screen magnifier (Maggie, hyprmag, wooz, or a custom command) from the bar or a keybind."
+tags         = ["bar", "shortcut", "utility"]
+dependencies = ["maggie", "hyprmag", "wooz"]
+
+# One shared set of settings for the whole plugin, edited from Settings → Plugins.
+
+[[setting]]
+key             = "backend"
+type            = "select"
+label_key       = "settings.backend.label"
+description_key = "settings.backend.description"
+default         = "maggie"
+options = [
+  { value = "maggie",  label_key = "settings.backend.options.maggie" },
+  { value = "hyprmag", label_key = "settings.backend.options.hyprmag" },
+  { value = "wooz",    label_key = "settings.backend.options.wooz" },
+  { value = "custom",  label_key = "settings.backend.options.custom" },
+]
+
+[[setting]]
+key             = "zoom"
+type            = "int"
+label_key       = "settings.zoom.label"
+description_key = "settings.zoom.description"
+default         = 3
+min             = 1
+max             = 9
+
+[[setting]]
+key             = "binary_path"
+type            = "file"
+label_key       = "settings.binary_path.label"
+description_key = "settings.binary_path.description"
+default         = ""
+
+[[setting]]
+key             = "custom_command"
+type            = "string"
+label_key       = "settings.custom_command.label"
+description_key = "settings.custom_command.description"
+default         = ""
+visible_when    = { key = "backend", values = ["custom"] }
+
+[[setting]]
+key             = "delay_ms"
+type            = "int"
+label_key       = "settings.delay_ms.label"
+description_key = "settings.delay_ms.description"
+default         = 150
+min             = 0
+max             = 10000
+
+# Bar tile. Left-click launches; it also accepts the "open" IPC event.
+[[widget]]
+id    = "launcher"
+entry = "widget.luau"
+
+# Control-center quick tile. Add it from Settings → Control Center → Shortcuts.
+[[shortcut]]
+id    = "tile"
+entry = "shortcut.luau"
