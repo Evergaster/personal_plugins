@@ -24,17 +24,18 @@ local lastMonth = nil
 
 -- Todas las celdas miden lo mismo: el mes no baila segun el dia de la semana.
 local function dayCell(day, today, key)
+  -- El borde se declara siempre, con ancho 0 cuando no toca: si se omite, la
+  -- celda que fue "hoy" conserva el aro al cambiar de mes (Noctalia no borra
+  -- los props que no vienen).
   local badge = {
     width = cell,
     height = cell,
     align = "center",
     justify = "center",
     radius = math.floor(cell / 2),
+    border = accent,
+    borderWidth = today and 1 or 0,
   }
-  if today then
-    badge.border = accent
-    badge.borderWidth = 1
-  end
   return ui.column(badge, {
     ui.label({
       key = key,

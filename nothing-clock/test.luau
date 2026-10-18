@@ -72,7 +72,12 @@ for _, row in ipairs(glyph.children) do
   eq(#row.children, 5, "cinco puntos por fila")
   for _, cell in ipairs(row.children) do
     points = points + 1
-    if cell.fill ~= nil then
+    -- El reconciliador de Noctalia no borra un prop que no viene: la celda
+    -- tiene que declarar relleno y opacidad en cada render, o el punto que
+    -- pasa de apagado a encendido se queda invisible.
+    eq(cell.fill ~= nil, true, "cada punto declara su relleno")
+    eq(cell.opacity ~= nil, true, "cada punto declara su opacidad")
+    if cell.opacity == 1 then
       lit = lit + 1
     end
   end

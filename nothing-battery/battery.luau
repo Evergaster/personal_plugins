@@ -115,7 +115,7 @@ local function picker()
     align = "center",
     padding = style.px(6, factor),
     radius = style.px(10, factor),
-    fill = pinned == "" and "on_surface/0.08" or nil,
+    fill = pinned == "" and "on_surface/0.08" or "on_surface/0",
     onClick = function() chooseDevice("") end,
   }, {
     ui.glyph({ name = "sparkles", size = style.px(16, factor), color = "on_surface_variant" }),
@@ -130,7 +130,9 @@ local function picker()
       align = "center",
       padding = style.px(6, factor),
       radius = style.px(10, factor),
-      fill = device.id == pinned and "on_surface/0.08" or nil,
+      -- El relleno va en cada render, aunque sea transparente: si se omite,
+      -- la fila que fue la elegida conserva el resaltado.
+      fill = device.id == pinned and "on_surface/0.08" or "on_surface/0",
       onClick = function() chooseDevice(device.id) end,
     }, {
       ui.glyph({ name = device.glyph, size = style.px(16, factor), color = "on_surface_variant" }),
