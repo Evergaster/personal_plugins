@@ -49,3 +49,16 @@ deprecated   = false
 plugin_api   = 24
 tags         = ["bar", "shortcut", "utility"]
 dependencies = ["maggie", "hyprmag", "wooz"]
+
+[[plugin]]
+id           = "evergaster/nothing"
+name         = "Nothing"
+version      = "1.1.0"
+author       = "evergaster"
+license      = "MIT"
+icon         = "dots"
+description  = "Nothing-style desktop blocks you compose yourself: dot-matrix clock, calendar, weather, and the battery of your headphones or mouse. Place only the ones you want."
+deprecated   = false
+plugin_api   = 26
+tags         = ["desktop", "clock", "calendar", "weather", "indicator"]
+dependencies = ["upower", "bluez"]

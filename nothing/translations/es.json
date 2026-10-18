@@ -1,0 +1,88 @@
+{
+  "settings.accent.label": "Color de acento",
+  "settings.accent.description": "El rojo de Nothing por defecto.",
+
+  "settings.scale.label": "Tamano del bloque",
+  "settings.scale.description": "Escala del bloque en por ciento (100 = normal).",
+
+  "settings.hour_format.label": "Formato de hora",
+  "settings.hour_format.description": "Reloj de 24 o de 12 horas.",
+  "settings.hour_format.options.24": "24 horas",
+  "settings.hour_format.options.12": "12 horas",
+
+  "settings.show_seconds.label": "Mostrar segundos",
+  "settings.show_seconds.description": "Anade los segundos al reloj de puntos.",
+
+  "settings.week_start.label": "Primer dia de la semana",
+  "settings.week_start.description": "Columna con la que empieza el calendario.",
+  "settings.week_start.options.monday": "Lunes",
+  "settings.week_start.options.sunday": "Domingo",
+
+  "settings.temperature_unit.label": "Unidad de temperatura",
+  "settings.temperature_unit.description": "Unidad que devuelve Open-Meteo.",
+  "settings.temperature_unit.options.metric": "Celsius",
+  "settings.temperature_unit.options.imperial": "Fahrenheit",
+
+  "settings.latitude.label": "Latitud",
+  "settings.latitude.description": "Coordenada manual. Vacia: se usa [location] de Noctalia.",
+
+  "settings.longitude.label": "Longitud",
+  "settings.longitude.description": "Coordenada manual. Vacia: se usa [location] de Noctalia.",
+
+  "settings.city.label": "Ciudad",
+  "settings.city.description": "Nombre para geocodificar si no hay coordenadas (ej. Valencia, ES).",
+
+  "settings.device.label": "Dispositivo",
+  "settings.device.description": "MAC o parte del nombre a mostrar (ej. CMF o el mouse). Vacio: automatico.",
+
+  "settings.device_poll_seconds.label": "Intervalo de bateria (s)",
+  "settings.device_poll_seconds.description": "Cada cuanto se relee la bateria de los perifericos.",
+
+  "settings.weather_refresh_minutes.label": "Intervalo de clima (min)",
+  "settings.weather_refresh_minutes.description": "Cada cuanto se consulta Open-Meteo.",
+
+  "settings.low_battery_threshold.label": "Umbral de bateria baja",
+  "settings.low_battery_threshold.description": "Porcentaje a partir del cual la bateria se pinta en rojo.",
+
+  "ui.close": "Cerrar",
+
+  "device.none": "SIN DISPOSITIVO",
+  "device.auto": "AUTOMATICO",
+  "device.empty": "Sin perifericos con bateria",
+
+  "weather.loading": "LEYENDO EL CLIMA",
+  "weather.unavailable": "SIN DATOS DEL CLIMA",
+  "weather.no_location": "SIN UBICACION CONFIGURADA",
+
+  "date.sun": "DOM",
+  "date.mon": "LUN",
+  "date.tue": "MAR",
+  "date.wed": "MIE",
+  "date.thu": "JUE",
+  "date.fri": "VIE",
+  "date.sat": "SAB",
+
+  "date.jan": "ENERO",
+  "date.feb": "FEBRERO",
+  "date.mar": "MARZO",
+  "date.apr": "ABRIL",
+  "date.may": "MAYO",
+  "date.jun": "JUNIO",
+  "date.jul": "JULIO",
+  "date.aug": "AGOSTO",
+  "date.sep": "SEPTIEMBRE",
+  "date.oct": "OCTUBRE",
+  "date.nov": "NOVIEMBRE",
+  "date.dec": "DICIEMBRE",
+
+  "wmo.clear": "DESPEJADO",
+  "wmo.mainly_clear": "CASI DESPEJADO",
+  "wmo.partly": "PARCIALMENTE NUBLADO",
+  "wmo.overcast": "CUBIERTO",
+  "wmo.fog": "NIEBLA",
+  "wmo.drizzle": "LLOVIZNA",
+  "wmo.rain": "LLUVIA",
+  "wmo.snow": "NIEVE",
+  "wmo.showers": "CHUBASCOS",
+  "wmo.thunder": "TORMENTA"
+}
