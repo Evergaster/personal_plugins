@@ -40,6 +40,22 @@ tamano que quieras.
 - **Bateria**: nombre, icono y 10 puntos de nivel; se pinta en rojo por debajo
   del umbral. Al hacer clic se abre el selector de dispositivos.
 
+## Nombres
+
+Noctalia nombra los bloques de un plugin con el `name` del manifiesto, y no lee
+un nombre por entrada, asi que en el selector de tipos los cuatro salen como
+**Nothing**. Para distinguirlos:
+
+- Al anadirlos, mira sus ajustes: el del reloj trae formato de hora, el del
+  calendario el primer dia de la semana, el del clima las coordenadas y el de la
+  bateria el dispositivo.
+- Ya colocados, cada instancia tiene su propio nombre y se renombra desde el
+  inspector del editor de widgets de escritorio. Sugeridos: `Nothing Clock`,
+  `Nothing Calendar`, `Nothing Weather` y `Nothing Battery`.
+
+Tener los cuatro nombres ya en el selector exigiria partirlo en cuatro plugins,
+porque el nombre es uno por manifiesto.
+
 ## Ajustes
 
 Compartido por los cuatro bloques, en **Settings -> Plugins** (engranaje del
