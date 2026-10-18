@@ -1,0 +1,22 @@
+{
+  "settings.accent.label": "Accent color",
+  "settings.accent.description": "Nothing's red by default.",
+
+  "settings.scale.label": "Block size",
+  "settings.scale.description": "Percent scale for this block (100 = normal).",
+
+  "settings.device.label": "Device",
+  "settings.device.description": "MAC or part of the name to show (e.g. CMF, or your mouse). Empty: automatic.",
+
+  "settings.device_poll_seconds.label": "Battery interval (s)",
+  "settings.device_poll_seconds.description": "How often peripheral batteries are read again.",
+
+  "settings.low_battery_threshold.label": "Low battery threshold",
+  "settings.low_battery_threshold.description": "Percentage below which the battery turns red.",
+
+  "ui.close": "Close",
+
+  "device.none": "NO DEVICE",
+  "device.auto": "AUTOMATIC",
+  "device.empty": "No peripherals reporting battery"
+}

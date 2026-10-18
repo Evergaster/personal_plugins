@@ -1,0 +1,33 @@
+{
+  "settings.accent.label": "Accent color",
+  "settings.accent.description": "Nothing's red by default.",
+
+  "settings.scale.label": "Block size",
+  "settings.scale.description": "Percent scale for this block (100 = normal).",
+
+  "settings.week_start.label": "Week starts on",
+  "settings.week_start.description": "First column of the month calendar.",
+  "settings.week_start.options.monday": "Monday",
+  "settings.week_start.options.sunday": "Sunday",
+
+  "date.sun": "SUN",
+  "date.mon": "MON",
+  "date.tue": "TUE",
+  "date.wed": "WED",
+  "date.thu": "THU",
+  "date.fri": "FRI",
+  "date.sat": "SAT",
+
+  "date.jan": "JANUARY",
+  "date.feb": "FEBRUARY",
+  "date.mar": "MARCH",
+  "date.apr": "APRIL",
+  "date.may": "MAY",
+  "date.jun": "JUNE",
+  "date.jul": "JULY",
+  "date.aug": "AUGUST",
+  "date.sep": "SEPTEMBER",
+  "date.oct": "OCTOBER",
+  "date.nov": "NOVEMBER",
+  "date.dec": "DECEMBER"
+}

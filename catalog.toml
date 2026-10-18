@@ -51,14 +51,54 @@ tags         = ["bar", "shortcut", "utility"]
 dependencies = ["maggie", "hyprmag", "wooz"]
 
 [[plugin]]
-id           = "evergaster/nothing"
-name         = "Nothing"
-version      = "1.1.0"
+id           = "evergaster/nothing-clock"
+name         = "Nothing Clock"
+version      = "1.0.0"
 author       = "evergaster"
 license      = "MIT"
-icon         = "dots"
-description  = "Nothing-style desktop blocks you compose yourself: dot-matrix clock, calendar, weather, and the battery of your headphones or mouse. Place only the ones you want."
+icon         = "clock"
+description  = "Dot-matrix NDot clock desktop block in Nothing style, with the short date. Place it anywhere on your desktop canvas."
 deprecated   = false
 plugin_api   = 26
-tags         = ["desktop", "clock", "calendar", "weather", "indicator"]
+tags         = ["desktop", "clock"]
+dependencies = []
+
+[[plugin]]
+id           = "evergaster/nothing-calendar"
+name         = "Nothing Calendar"
+version      = "1.0.0"
+author       = "evergaster"
+license      = "MIT"
+icon         = "calendar"
+description  = "Month calendar desktop block in Nothing style, with today ringed in the accent colour."
+deprecated   = false
+plugin_api   = 26
+tags         = ["desktop", "calendar"]
+dependencies = []
+
+[[plugin]]
+id           = "evergaster/nothing-weather"
+name         = "Nothing Weather"
+version      = "1.0.0"
+author       = "evergaster"
+license      = "MIT"
+icon         = "cloud"
+description  = "Weather desktop block in Nothing style: current conditions and the next three days, via Open-Meteo."
+deprecated   = false
+plugin_api   = 26
+tags         = ["desktop", "weather"]
+dependencies = []
+
+[[plugin]]
+id           = "evergaster/nothing-battery"
+name         = "Nothing Battery"
+version      = "1.0.0"
+author       = "evergaster"
+license      = "MIT"
+icon         = "battery"
+description  = "Desktop block in Nothing style showing the battery of the picked peripheral (headphones, mouse, keyboard), read from BlueZ and upower."
+deprecated   = false
+plugin_api   = 26
+tags         = ["desktop", "indicator", "bluetooth"]
 dependencies = ["upower", "bluez"]
+

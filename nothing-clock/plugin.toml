@@ -1,0 +1,56 @@
+# Nothing Clock — bloque de escritorio para Noctalia.
+#
+# Un solo [[desktop_widget]]: reloj de matriz de puntos NDot y la fecha corta. El tamano lo lleva su ajuste `scale`; la posicion, el tamano de la ficha y la rotacion los controla Noctalia desde el editor.
+#
+# La familia Nothing va un plugin por bloque porque Noctalia nombra los bloques
+# con el `name` del manifiesto: un plugin por nombre distinto.
+
+id           = "evergaster/nothing-clock"
+name         = "Nothing Clock"
+version      = "1.0.0"
+plugin_api   = 26
+author       = "evergaster"
+license      = "MIT"
+icon         = "clock"
+description  = "Reloj de escritorio estilo Nothing: matriz de puntos NDot y la fecha corta."
+tags         = ["desktop", "clock"]
+dependencies = []
+
+# El rojo de Nothing por defecto.
+[[setting]]
+key             = "accent"
+type            = "color"
+label_key       = "settings.accent.label"
+description_key = "settings.accent.description"
+default         = "#D71921"
+
+[[desktop_widget]]
+id    = "clock"
+entry = "clock.luau"
+
+  [[desktop_widget.setting]]
+  key             = "scale"
+  type            = "int"
+  label_key       = "settings.scale.label"
+  description_key = "settings.scale.description"
+  default         = 100
+  min             = 50
+  max             = 300
+
+  [[desktop_widget.setting]]
+  key             = "hour_format"
+  type            = "select"
+  label_key       = "settings.hour_format.label"
+  description_key = "settings.hour_format.description"
+  default         = "24"
+  options = [
+    { value = "24", label_key = "settings.hour_format.options.24" },
+    { value = "12", label_key = "settings.hour_format.options.12" },
+  ]
+
+  [[desktop_widget.setting]]
+  key             = "show_seconds"
+  type            = "bool"
+  label_key       = "settings.show_seconds.label"
+  description_key = "settings.show_seconds.description"
+  default         = false

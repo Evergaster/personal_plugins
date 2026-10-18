@@ -1,0 +1,49 @@
+# Nothing Calendar — bloque de escritorio para Noctalia.
+#
+# Un solo [[desktop_widget]]: el mes en curso con el dia de hoy marcado en el color de acento. El tamano lo lleva su ajuste `scale`.
+#
+# La familia Nothing va un plugin por bloque porque Noctalia nombra los bloques
+# con el `name` del manifiesto: un plugin por nombre distinto.
+
+id           = "evergaster/nothing-calendar"
+name         = "Nothing Calendar"
+version      = "1.0.0"
+plugin_api   = 26
+author       = "evergaster"
+license      = "MIT"
+icon         = "calendar"
+description  = "Bloque de escritorio estilo Nothing: el mes en curso, con hoy marcado en el color de acento."
+tags         = ["desktop", "calendar"]
+dependencies = []
+
+# El rojo de Nothing por defecto.
+[[setting]]
+key             = "accent"
+type            = "color"
+label_key       = "settings.accent.label"
+description_key = "settings.accent.description"
+default         = "#D71921"
+
+[[desktop_widget]]
+id    = "calendar"
+entry = "calendar.luau"
+
+  [[desktop_widget.setting]]
+  key             = "scale"
+  type            = "int"
+  label_key       = "settings.scale.label"
+  description_key = "settings.scale.description"
+  default         = 100
+  min             = 50
+  max             = 300
+
+  [[desktop_widget.setting]]
+  key             = "week_start"
+  type            = "select"
+  label_key       = "settings.week_start.label"
+  description_key = "settings.week_start.description"
+  default         = "monday"
+  options = [
+    { value = "monday", label_key = "settings.week_start.options.monday" },
+    { value = "sunday", label_key = "settings.week_start.options.sunday" },
+  ]

@@ -1,0 +1,36 @@
+{
+  "settings.accent.label": "Color de acento",
+  "settings.accent.description": "El rojo de Nothing por defecto.",
+
+  "settings.scale.label": "Tamano del bloque",
+  "settings.scale.description": "Escala del bloque en por ciento (100 = normal).",
+
+  "settings.hour_format.label": "Formato de hora",
+  "settings.hour_format.description": "Reloj de 24 o de 12 horas.",
+  "settings.hour_format.options.24": "24 horas",
+  "settings.hour_format.options.12": "12 horas",
+
+  "settings.show_seconds.label": "Mostrar segundos",
+  "settings.show_seconds.description": "Anade los segundos al reloj de puntos.",
+
+  "date.sun": "DOM",
+  "date.mon": "LUN",
+  "date.tue": "MAR",
+  "date.wed": "MIE",
+  "date.thu": "JUE",
+  "date.fri": "VIE",
+  "date.sat": "SAB",
+
+  "date.jan": "ENERO",
+  "date.feb": "FEBRERO",
+  "date.mar": "MARZO",
+  "date.apr": "ABRIL",
+  "date.may": "MAYO",
+  "date.jun": "JUNIO",
+  "date.jul": "JULIO",
+  "date.aug": "AGOSTO",
+  "date.sep": "SEPTIEMBRE",
+  "date.oct": "OCTUBRE",
+  "date.nov": "NOVIEMBRE",
+  "date.dec": "DICIEMBRE"
+}

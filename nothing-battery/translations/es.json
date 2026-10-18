@@ -1,0 +1,22 @@
+{
+  "settings.accent.label": "Color de acento",
+  "settings.accent.description": "El rojo de Nothing por defecto.",
+
+  "settings.scale.label": "Tamano del bloque",
+  "settings.scale.description": "Escala del bloque en por ciento (100 = normal).",
+
+  "settings.device.label": "Dispositivo",
+  "settings.device.description": "MAC o parte del nombre a mostrar (ej. CMF o el mouse). Vacio: automatico.",
+
+  "settings.device_poll_seconds.label": "Intervalo de bateria (s)",
+  "settings.device_poll_seconds.description": "Cada cuanto se relee la bateria de los perifericos.",
+
+  "settings.low_battery_threshold.label": "Umbral de bateria baja",
+  "settings.low_battery_threshold.description": "Porcentaje a partir del cual la bateria se pinta en rojo.",
+
+  "ui.close": "Cerrar",
+
+  "device.none": "SIN DISPOSITIVO",
+  "device.auto": "AUTOMATICO",
+  "device.empty": "Sin perifericos con bateria"
+}

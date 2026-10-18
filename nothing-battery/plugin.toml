@@ -1,0 +1,63 @@
+# Nothing Battery — bloque de escritorio para Noctalia.
+#
+# Un solo [[desktop_widget]]: la bateria del periferico que elijas (audifonos, mouse, teclado), leida de BlueZ y upower, con selector de dispositivos.
+#
+# La familia Nothing va un plugin por bloque porque Noctalia nombra los bloques
+# con el `name` del manifiesto: un plugin por nombre distinto.
+
+id           = "evergaster/nothing-battery"
+name         = "Nothing Battery"
+version      = "1.0.0"
+plugin_api   = 26
+author       = "evergaster"
+license      = "MIT"
+icon         = "battery"
+description  = "Bloque de escritorio estilo Nothing: la bateria del periferico que elijas (audifonos, mouse, teclado), leida de BlueZ y upower."
+tags         = ["desktop", "indicator", "bluetooth"]
+dependencies = ["upower", "bluez"]
+
+# El rojo de Nothing por defecto.
+[[setting]]
+key             = "accent"
+type            = "color"
+label_key       = "settings.accent.label"
+description_key = "settings.accent.description"
+default         = "#D71921"
+
+[[desktop_widget]]
+id    = "battery"
+entry = "battery.luau"
+
+  [[desktop_widget.setting]]
+  key             = "scale"
+  type            = "int"
+  label_key       = "settings.scale.label"
+  description_key = "settings.scale.description"
+  default         = 100
+  min             = 50
+  max             = 300
+
+  [[desktop_widget.setting]]
+  key             = "device"
+  type            = "string"
+  label_key       = "settings.device.label"
+  description_key = "settings.device.description"
+  default         = ""
+
+  [[desktop_widget.setting]]
+  key             = "device_poll_seconds"
+  type            = "int"
+  label_key       = "settings.device_poll_seconds.label"
+  description_key = "settings.device_poll_seconds.description"
+  default         = 120
+  min             = 30
+  max             = 600
+
+  [[desktop_widget.setting]]
+  key             = "low_battery_threshold"
+  type            = "int"
+  label_key       = "settings.low_battery_threshold.label"
+  description_key = "settings.low_battery_threshold.description"
+  default         = 20
+  min             = 0
+  max             = 100

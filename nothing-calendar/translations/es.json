@@ -1,0 +1,33 @@
+{
+  "settings.accent.label": "Color de acento",
+  "settings.accent.description": "El rojo de Nothing por defecto.",
+
+  "settings.scale.label": "Tamano del bloque",
+  "settings.scale.description": "Escala del bloque en por ciento (100 = normal).",
+
+  "settings.week_start.label": "Primer dia de la semana",
+  "settings.week_start.description": "Columna con la que empieza el calendario.",
+  "settings.week_start.options.monday": "Lunes",
+  "settings.week_start.options.sunday": "Domingo",
+
+  "date.sun": "DOM",
+  "date.mon": "LUN",
+  "date.tue": "MAR",
+  "date.wed": "MIE",
+  "date.thu": "JUE",
+  "date.fri": "VIE",
+  "date.sat": "SAB",
+
+  "date.jan": "ENERO",
+  "date.feb": "FEBRERO",
+  "date.mar": "MARZO",
+  "date.apr": "ABRIL",
+  "date.may": "MAYO",
+  "date.jun": "JUNIO",
+  "date.jul": "JULIO",
+  "date.aug": "AGOSTO",
+  "date.sep": "SEPTIEMBRE",
+  "date.oct": "OCTUBRE",
+  "date.nov": "NOVIEMBRE",
+  "date.dec": "DICIEMBRE"
+}

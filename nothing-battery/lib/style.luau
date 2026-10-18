@@ -1,4 +1,9 @@
 --!nonstrict
+-- Copia vendorizada: este modulo vive igual en los plugins Nothing hermanos
+-- (nothing-clock, nothing-calendar, nothing-weather, nothing-battery) porque
+-- Noctalia no comparte codigo entre plugins.
+-- shortcut: duplicado en los hermanos, unificar si Noctalia llega a permitir
+-- requerir modulos entre plugins.
 -- style.luau — la tarjeta y la escala que comparten los cuatro bloques.
 -- `noctalia` y `ui` solo se tocan dentro de las funciones: el modulo se puede
 -- cargar (y probar) sin Noctalia.

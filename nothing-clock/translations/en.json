@@ -1,0 +1,36 @@
+{
+  "settings.accent.label": "Accent color",
+  "settings.accent.description": "Nothing's red by default.",
+
+  "settings.scale.label": "Block size",
+  "settings.scale.description": "Percent scale for this block (100 = normal).",
+
+  "settings.hour_format.label": "Hour format",
+  "settings.hour_format.description": "24-hour or 12-hour clock.",
+  "settings.hour_format.options.24": "24-hour",
+  "settings.hour_format.options.12": "12-hour",
+
+  "settings.show_seconds.label": "Show seconds",
+  "settings.show_seconds.description": "Append seconds to the dot clock.",
+
+  "date.sun": "SUN",
+  "date.mon": "MON",
+  "date.tue": "TUE",
+  "date.wed": "WED",
+  "date.thu": "THU",
+  "date.fri": "FRI",
+  "date.sat": "SAT",
+
+  "date.jan": "JANUARY",
+  "date.feb": "FEBRUARY",
+  "date.mar": "MARCH",
+  "date.apr": "APRIL",
+  "date.may": "MAY",
+  "date.jun": "JUNE",
+  "date.jul": "JULY",
+  "date.aug": "AUGUST",
+  "date.sep": "SEPTEMBER",
+  "date.oct": "OCTOBER",
+  "date.nov": "NOVEMBER",
+  "date.dec": "DECEMBER"
+}

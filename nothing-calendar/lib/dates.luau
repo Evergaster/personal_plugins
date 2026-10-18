@@ -1,4 +1,9 @@
 --!nonstrict
+-- Copia vendorizada: este modulo vive igual en los plugins Nothing hermanos
+-- (nothing-clock, nothing-calendar, nothing-weather, nothing-battery) porque
+-- Noctalia no comparte codigo entre plugins.
+-- shortcut: duplicado en los hermanos, unificar si Noctalia llega a permitir
+-- requerir modulos entre plugins.
 -- dates.luau — calendario puro: sin noctalia, sin ui. Testeable con lua5.4.
 
 local M = {}
